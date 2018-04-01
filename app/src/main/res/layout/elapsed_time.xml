@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundDefault"
+    android:elevation="2dp"
+    >
+
+    <!--TODO: Resize this so it works on smallest screens-->
+
+    <!--ETA text-->
+    <TextView
+        android:id="@+id/elapsedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:text="@string/elapsed_text"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/yearElapsed"
+        app:layout_constraintHorizontal_bias="0.0"
+        />
+
+    <!--Year-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/yearElapsed"
+        android:textSize="@dimen/countdown_number_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintLeft_toRightOf="@id/elapsedText"
+        app:layout_constraintTop_toTopOf="@id/elapsedText"
+        app:layout_constraintRight_toLeftOf="@+id/monthElapsed"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/year_label"
+        android:textSize="@dimen/countdown_label_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/yearElapsed"
+        app:layout_constraintRight_toRightOf="@id/yearElapsed"
+        app:layout_constraintTop_toBottomOf="@id/yearElapsed"
+        app:layout_constraintHorizontal_bias="0.5"
+        />
+
+    <!--Month-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/monthElapsed"
+        android:textSize="@dimen/countdown_number_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintLeft_toRightOf="@id/yearElapsed"
+        app:layout_constraintTop_toTopOf="@id/etaText"
+        app:layout_constraintRight_toLeftOf="@+id/dayElapsed"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/month_label"
+        android:textSize="@dimen/countdown_label_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/monthElapsed"
+        app:layout_constraintRight_toRightOf="@id/monthElapsed"
+        app:layout_constraintTop_toBottomOf="@id/monthElapsed"
+        app:layout_constraintHorizontal_bias="0.5"
+        />
+
+    <!--Day-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dayElapsed"
+        android:textSize="@dimen/countdown_number_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintLeft_toRightOf="@id/monthElapsed"
+        app:layout_constraintTop_toTopOf="@id/etaText"
+        app:layout_constraintRight_toLeftOf="@+id/hourElapsed"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/day_label"
+        android:textSize="@dimen/countdown_label_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/dayElapsed"
+        app:layout_constraintTop_toBottomOf="@id/dayElapsed"
+        app:layout_constraintRight_toRightOf="@id/dayElapsed"
+        app:layout_constraintHorizontal_bias="0.5"
+        />
+
+    <!--Hour-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hourElapsed"
+        android:textSize="@dimen/countdown_number_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintLeft_toRightOf="@id/dayElapsed"
+        app:layout_constraintTop_toTopOf="@id/etaText"
+        app:layout_constraintRight_toLeftOf="@+id/minuteElapsed"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hour_label"
+        android:textSize="@dimen/countdown_label_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/hourElapsed"
+        app:layout_constraintTop_toBottomOf="@id/hourElapsed"
+        app:layout_constraintRight_toRightOf="@id/hourElapsed"
+        app:layout_constraintHorizontal_bias="0.5"
+        />
+
+    <!--Minute-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/minuteElapsed"
+        android:textSize="@dimen/countdown_number_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintLeft_toRightOf="@id/hourElapsed"
+        app:layout_constraintTop_toTopOf="@id/etaText"
+        app:layout_constraintRight_toLeftOf="@+id/secondElapsed"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/minute_label"
+        android:textSize="@dimen/countdown_label_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/minuteElapsed"
+        app:layout_constraintTop_toBottomOf="@id/minuteElapsed"
+        app:layout_constraintRight_toRightOf="@id/minuteElapsed"
+        app:layout_constraintHorizontal_bias="0.5"
+        />
+
+    <!--Second-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/secondElapsed"
+        android:textSize="@dimen/countdown_number_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintLeft_toRightOf="@id/minuteElapsed"
+        app:layout_constraintTop_toTopOf="@id/etaText"
+        app:layout_constraintRight_toLeftOf="parent"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/seconds_label"
+        android:textSize="@dimen/countdown_label_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/secondElapsed"
+        app:layout_constraintTop_toBottomOf="@id/secondElapsed"
+        app:layout_constraintRight_toRightOf="@id/secondElapsed"
+        app:layout_constraintHorizontal_bias="0.5"
+        />
+
+</android.support.constraint.ConstraintLayout>

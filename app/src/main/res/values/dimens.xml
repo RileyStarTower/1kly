@@ -1,0 +1,9 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="countdown_height">64dp</dimen>
+    <dimen name="countdown_number_size">25sp</dimen>
+    <dimen name="countdown_label_size">14sp</dimen>
+    <dimen name="standard_padding">8dp</dimen>
+    <dimen name="half_padding">4dp</dimen>
+    <dimen name="standard_elevation">2dp</dimen>
+</resources>

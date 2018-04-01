@@ -1,0 +1,92 @@
+<resources>
+    <!--Common strings-->
+    <string name="app_name">1 kly</string>
+    <string name="action_about">About</string>
+    <string name="ship_description">A vector graphics spaceship, in a retro style with large fins, in a bluish gray color</string>
+
+    <!--Settings-->
+    <string name="title_activity_settings">Settings</string>
+    <string name="notifications_preference">New task notifications</string>
+
+    <!--Countdown/Elapsed timers-->
+    <string name="eta_text">ETA:</string>
+    <string name="elapsed_text">Elapsed:</string>
+    <string name="year_label">years</string>
+    <string name="month_label">months</string>
+    <string name="day_label">days</string>
+    <string name="hour_label">hours</string>
+    <string name="minute_label">min</string>
+    <string name="seconds_label">sec</string>
+
+    <!--Manifest activity-->
+    <string name="ship_manifest_button">Manifest</string>
+    <string name="title_activity_manifest">Manifest</string>
+    <string name="search_hint">Search passengers</string>
+    <string name="query_display_label">Results for:</string>
+    <string name="column_username">Username</string>
+    <string name="column_location">Location</string>
+
+    <!--Passenger profile activity-->
+    <string name="title_activity_passenger_profile">Profile</string>
+    <string name="label_id">Manifest ID:</string>
+    <string name="label_username">Username:</string>
+    <string name="label_location">Location:</string>
+    <string name="label_occupation">Occupation:</string>
+    <string name="label_connections">Connections:</string>
+    <string name="label_name">Name:</string>
+    <string name="label_health">Health status:</string>
+    <string name="censor">****</string>
+    <string name="login_personal_info">Perform credentials to view personal information.</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_login">Login</string>
+
+    <!--Destination activity-->
+    <string name="title_activity_destination">Destination Status</string>
+    <string name="demographics_label">Destination demographics:</string>
+    <string name="local_flora_label">Local flora:</string>
+    <string name="local_flora_val">None</string>
+    <string name="resident_flora_label">Resident flora:</string>
+    <string name="resident_flora_val">Good</string>
+    <string name="null_string">-</string>
+    <string name="resident_health_label">Resident health:</string>
+    <string name="infrastructure_label">Infrastructure:</string>
+    <string name="infrastructure_val">Good</string>
+    <string name="local_perception_label">Local opinion:</string>
+    <string name="non_human_perception_label">Nonhuman opinion:</string>
+    <string name="login_resident_admin">Perform resident admin credentials to access destination portal.</string>
+
+    <!--Tasks activity-->
+    <string name="title_activity_tasks">Tasks</string>
+    <string name="no_notifications">No current tasks</string>
+    <string name="expiration_date">Expires:</string>
+    <string name="past_due">past due</string>
+    <string name="resolve_generic">Tap to resolve task.</string>
+    <string name="invalid_task">The task management service has encountered a problem. Please contact your system administrator.</string>
+    <string name="resolve_invalid">Tap to dismiss message.</string>
+
+    <!--Ship Status activity-->
+    <string name="title_activity_ship_status">Ship Status</string>
+    <string name="remaining">Remaining dist:</string>
+    <string name="elapsed_distance">Elapsed dist:</string>
+    <string name="current_speed">Current speed:</string>
+    <string name="average_speed">Average speed:</string>
+    <string name="speed_val">0.99 C</string>
+    <string name="passenger_health">Passenger health:</string>
+    <string name="health_good">Good</string>
+    <string name="passenger_risk">Under observation:</string>
+    <string name="risk_count">2</string>
+    <string name="breakdown_label">Passenger occupations:</string>
+    <string name="filament_label">Filament loss:</string>
+    <string name="filament_val">0.00 mm</string>
+    <string name="printer_label">Printer condition:</string>
+    <string name="printer_val">Good</string>
+    <string name="login_voyage_admin">Perform admin credentials to view protected details.</string>
+
+    <!--About activity-->
+    <string name="title_activity_about">About</string>
+    <string name="artist_note_label">Artist\'s Note</string>
+    <string name="artist_note_val_1">There are a lot of problems in the world that will likely not be resolved in my lifetime. In many cases, it\'s impossible to know if my actions even impact that resolution. This leads to a big question: how do I motivate myself to approach an issue that I will never see the end of, and might not even be able to affect?</string>
+    <string name="artist_note_val_2">This app is a conceptual art piece, presented as a mobile game. There are basically two mechanics in 1 kly: tasks, and the slow march of time. Neither of those will get you to the end, for almost everyone who might read this. Don\'t worry too much, though. Check in when you can. We got this.</string>
+    <string name="artist_note_val_3">k = kilo</string>
+    <string name="artist_note_val_4">ly = light-year</string>
+</resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/taskItemL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/backgroundDefault"
+        android:elevation="2dp"
+        android:layout_margin="4dp"
+        style="@style/AppTheme">
+
+        <TextView
+            android:id="@+id/taskDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/buttonText"
+            android:textSize="18sp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:id="@+id/expirationLabel"
+                android:text="@string/expiration_date"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/expirationDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/resolveTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dataBlue"
+            android:textStyle="italic"
+            android:textSize="16sp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp" />
+    </LinearLayout>
+</LinearLayout>

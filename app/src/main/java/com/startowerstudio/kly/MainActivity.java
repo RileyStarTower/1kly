@@ -1,0 +1,144 @@
+package com.startowerstudio.kly;
+
+import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
+import com.startowerstudio.kly.db.TaskQueries;
+
+import java.io.File;
+import java.util.ArrayList;
+
+public class MainActivity extends KlyActivity {
+    private ArrayList<KlyTask> taskList;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        startCountdown();
+
+        // TODO: only here for testing purposes
+//        deleteFiles();
+
+        if (!EtaCountdown.getInstance().timerUp()) {
+            taskList = loadTasks();
+
+            // maximum of 10 tasks to keep things reasonable to look at
+            if (taskList.size() < 10) {
+                // execute the query to get a new task
+                Cursor taskCursor = TaskQueries.getInstance().getOneTask(this);
+
+                // create a task unless we didn't get anything back (can happen if all tasks have been used recently
+//                if (taskCursor.getCount() > -1) {
+                    // create the task
+                    int count = KlyTaskUtils.getInstance().getNextCount(taskList);
+                    KlyTask task = new KlyTask(taskCursor, count, this);
+                    TaskQueries.getInstance().updateTaskDate(this, task.getId());
+                    task.writeTask(this);
+                    taskList.add(task);
+
+                    // now schedule the task
+                    KlyTaskUtils.getInstance().scheduleNotification(this, task, new Handler());
+//                }
+            }
+
+            updateTasksButton();
+        } else {
+            deleteFiles();
+        }
+    }
+
+    // TODO: this is only for testing purposes
+    private void deleteFiles() {
+        String[] fileList = getFilesDir().list();
+        File dir = getFilesDir();
+        for (String f:fileList) {
+            if (!f.substring(0,3).equals("cur")) continue;
+            File file = new File(dir, f);
+            boolean deleted = file.delete();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        // TODO go to the walk-through activity. Should it be called "About" since it will have other stuff too?
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void updateTasksButton() {
+        int count = 0;
+        String countString;
+        Button taskButton = (Button) findViewById(R.id.tasks);
+
+        for (KlyTask task : taskList) {
+            if (task.hasStarted()) count++;
+        }
+
+        if (count < 1) {
+            countString = "";
+        } else if (count <= 9) {
+            countString = " (" + count + ")";
+        } else {
+            countString = " (9+)";
+        }
+        String taskLabel = getResources().getText(R.string.title_activity_tasks) + countString;
+        taskButton.setText(taskLabel);
+    }
+
+    public void tasksButton(View view) {
+        Intent intent = new Intent(this, Tasks.class);
+        startActivity(intent);
+    }
+
+//    public void actStatus(View view) {
+//        Intent intent = new Intent(this, ShipStatus.class);
+//        startActivity(intent);
+//    }
+
+    public void btnManifest(View view) {
+        Intent intent = new Intent(this, Manifest.class);
+        startActivity(intent);
+    }
+
+    public void btnDestination(View view) {
+        Intent intent = new Intent(this, DestinationActivity.class);
+        startActivity(intent);
+    }
+
+    public void aboutActivity(MenuItem item) {
+        Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
+    }
+
+    public void settingsActivity(MenuItem item) {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+}

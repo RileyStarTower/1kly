@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#95a9bd</color>
+    <color name="colorPrimaryDark">#708498</color>
+    <color name="colorAccent">#95a9bd</color>
+    <color name="buttonText">#707070</color>
+    <color name="buttonBackground">#ffffff</color>
+    <color name="nullText">@android:color/darker_gray</color>
+    <color name="backgroundDefault">#fafafa</color>
+    <color name="dataBlue">#1d83e9</color>
+    <color name="taskBackground">#f8faff</color>
+    <color name="expiredTask">#f44336</color>
+    <color name="greenLight">#64dd17</color>
+    <color name="activityBackground">#eeeeee</color>
+</resources>

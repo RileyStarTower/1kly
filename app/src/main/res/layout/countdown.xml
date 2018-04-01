@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundDefault"
+    android:elevation="2dp"
+    android:onClick="actStatus">
+
+    <!--ETA text-->
+    <TextView
+        android:id="@+id/etaText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        android:text="@string/eta_text"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/countdown_number_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/yearNumber"
+        app:layout_constraintHorizontal_bias="0.0"
+        />
+
+    <!--Year-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/yearNumber"
+        android:textSize="@dimen/countdown_number_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintLeft_toRightOf="@id/etaText"
+        app:layout_constraintTop_toTopOf="@id/etaText"
+        app:layout_constraintRight_toLeftOf="@+id/monthNumber"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/yearLabel"
+        android:text="@string/year_label"
+        android:textSize="@dimen/countdown_label_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/yearNumber"
+        app:layout_constraintRight_toRightOf="@id/yearNumber"
+        app:layout_constraintTop_toBottomOf="@id/yearNumber"
+        app:layout_constraintHorizontal_bias="0.5"
+        />
+
+    <!--Month-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/monthNumber"
+        android:textSize="@dimen/countdown_number_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintLeft_toRightOf="@id/yearNumber"
+        app:layout_constraintTop_toTopOf="@id/etaText"
+        app:layout_constraintRight_toLeftOf="@+id/dayNumber"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/monthLabel"
+        android:text="@string/month_label"
+        android:textSize="@dimen/countdown_label_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/monthNumber"
+        app:layout_constraintRight_toRightOf="@id/monthNumber"
+        app:layout_constraintTop_toBottomOf="@id/monthNumber"
+        app:layout_constraintHorizontal_bias="0.5"
+        />
+
+    <!--Day-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dayNumber"
+        android:textSize="@dimen/countdown_number_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintLeft_toRightOf="@id/monthNumber"
+        app:layout_constraintTop_toTopOf="@id/etaText"
+        app:layout_constraintRight_toLeftOf="@+id/hourNumber"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dayLabel"
+        android:text="@string/day_label"
+        android:textSize="@dimen/countdown_label_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/dayNumber"
+        app:layout_constraintTop_toBottomOf="@id/dayNumber"
+        app:layout_constraintRight_toRightOf="@id/dayNumber"
+        app:layout_constraintHorizontal_bias="0.5"
+        />
+
+    <!--Hour-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hourNumber"
+        android:textSize="@dimen/countdown_number_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintLeft_toRightOf="@id/dayNumber"
+        app:layout_constraintTop_toTopOf="@id/etaText"
+        app:layout_constraintRight_toLeftOf="@+id/minuteNumber"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hourLabel"
+        android:text="@string/hour_label"
+        android:textSize="@dimen/countdown_label_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/hourNumber"
+        app:layout_constraintTop_toBottomOf="@id/hourNumber"
+        app:layout_constraintRight_toRightOf="@id/hourNumber"
+        app:layout_constraintHorizontal_bias="0.5"
+        />
+
+    <!--Minute-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/minuteNumber"
+        android:textSize="@dimen/countdown_number_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintLeft_toRightOf="@id/hourNumber"
+        app:layout_constraintTop_toTopOf="@id/etaText"
+        app:layout_constraintRight_toLeftOf="@+id/secondNumber"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/minuteLabel"
+        android:text="@string/minute_label"
+        android:textSize="@dimen/countdown_label_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/minuteNumber"
+        app:layout_constraintTop_toBottomOf="@id/minuteNumber"
+        app:layout_constraintRight_toRightOf="@id/minuteNumber"
+        app:layout_constraintHorizontal_bias="0.5"
+        />
+
+    <!--Second-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/secondNumber"
+        android:textSize="@dimen/countdown_number_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintLeft_toRightOf="@id/minuteNumber"
+        app:layout_constraintTop_toTopOf="@id/etaText"
+        app:layout_constraintRight_toLeftOf="parent"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/secondLabel"
+        android:text="@string/seconds_label"
+        android:textSize="@dimen/countdown_label_size"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/secondNumber"
+        app:layout_constraintTop_toBottomOf="@id/secondNumber"
+        app:layout_constraintRight_toRightOf="@id/secondNumber"
+        app:layout_constraintHorizontal_bias="0.5"
+        />
+
+</android.support.constraint.ConstraintLayout>
