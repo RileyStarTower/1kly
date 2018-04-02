@@ -15,13 +15,21 @@ import android.widget.TextView;
 
 import com.startowerstudio.kly.db.ManifestQueries;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Random;
 
 public class ShipStatus extends KlyActivity {
     private TextView yearsElapsed, monthsElapsed, daysElapsed, hoursElapsed, minutesElapsed, secondsElapsed;
     private Handler handlerElapsed;
     private Runnable runnableElapsed;
+    private final String OBSERVATION_FILEPATH = "observationData";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +74,9 @@ public class ShipStatus extends KlyActivity {
             ListView listView = (NonScrollListView) findViewById(R.id.breakdownList);
             listView.setVisibility(View.GONE);
         }
+
+        // TODO: might be some performance issues with this...
+        updateObservation();
     }
 
     // Initialize the view objects for the elapsed time layout
@@ -133,6 +144,63 @@ public class ShipStatus extends KlyActivity {
             }
         };
         handlerElapsed.postDelayed(runnableElapsed, 0);
+    }
+
+    private void updateObservation() {
+        // load file
+        BufferedReader fileIn;
+        FileInputStream fs;
+        DataInputStream ds;
+        Calendar endTime;
+        int count = 2;  // default count value is 2
+        Random rnd = new Random();
+        try {
+            // get the end time and count from the file, and then close it
+            fs = openFileInput(OBSERVATION_FILEPATH);
+            ds = new DataInputStream(fs);
+            fileIn = new BufferedReader(new InputStreamReader(ds));
+            endTime = DateUtils.getInstance().mkCalendar(fileIn.readLine());
+            count = Integer.parseInt(fileIn.readLine());
+
+            // TODO: do I need all three of these?
+            fileIn.close();
+            ds.close();
+            fs.close();
+
+            if (Calendar.getInstance().after(endTime)) {
+                // update the count and time
+                count += rnd.nextBoolean() ? 1 : -1;    // randomly add or remove a passenger
+                count = count < 0 ? 0 : count;          // if count goes below 0, reset it to 0
+                endTime = Calendar.getInstance();
+                // TODO: maybe make this a function? since it's reused?
+                endTime.add(Calendar.MINUTE, (int) Math.floor(1440 + (2160 * rnd.nextDouble()))); // add between 1 and 2.5 days
+
+                // write the new data back to the file
+                writeObservation(endTime, count);
+            }
+        } catch (IOException e) {
+            // no file, create file
+            count = 2; // default count is 2
+            endTime = Calendar.getInstance();
+            endTime.add(Calendar.MINUTE, (int) Math.floor(1440 + (2160 * rnd.nextDouble()))); // add between 1 and 2.5 days
+
+            // write the new data back to the file
+            // TODO: don't have a nested try here, come on... ok, but it still is a nested try...
+            writeObservation(endTime, count);
+        }
+
+        updateText((TextView) findViewById(R.id.riskVal), Integer.toString(count));
+    }
+
+    private void writeObservation(Calendar endTime, int count) {
+        try {
+            FileOutputStream outputStream = openFileOutput(OBSERVATION_FILEPATH, MODE_PRIVATE);
+            outputStream.write(DateUtils.getInstance().unMkCalendar(endTime).getBytes());
+            outputStream.write(Integer.toString(count).getBytes());
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // This just calls the base function with the specific string

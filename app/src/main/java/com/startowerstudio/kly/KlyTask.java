@@ -101,6 +101,10 @@ public class KlyTask {
             start = DateUtils.getInstance().mkCalendar(startString);
             String expirationString = fileIn.readLine();
             expiration = DateUtils.getInstance().mkCalendar(expirationString);
+            // TODO: do I need all three of these?
+            fileIn.close();
+            ds.close();
+            fs.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
