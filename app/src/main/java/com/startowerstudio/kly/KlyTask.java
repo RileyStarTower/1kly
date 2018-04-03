@@ -10,8 +10,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Calendar;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 /**
  * Created by Riley on 1/27/2018.
@@ -21,7 +19,6 @@ public class KlyTask {
     private String description, filename, expiredText, resolutionText;
     private Calendar start, expiration;
     private int id;
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     static final String CURRENT_TASKS_BASE = "currentTask";
 
@@ -74,8 +71,6 @@ public class KlyTask {
     // TODO: mostly just used for testing...
     KlyTask(String description, String filename, String expiredText, String resolutionText) {
         this.description = description;
-//        this.start = DateUtils.getInstance().mkCalendar(start);
-//        this.expiration = DateUtils.getInstance().mkCalendar(expiration);
         this.filename = filename;
         this.expiredText = expiredText;
         this.resolutionText = resolutionText;
@@ -112,22 +107,20 @@ public class KlyTask {
 
     // Constructor that reads from a database result
     KlyTask(Cursor taskCursor, int fileCount, Context context) {
-        // TODO: this crashes if the cursor doesn't have data for those columns
-        // We could catch a CursorIndexOutOfBounds error, or just check the size
-        // But we're already doing that before we call this
-        // Maybe it would be better to do that check here, and make a fake task
-        // with a description like, "please contact your system administrator"?
         if (taskCursor.getCount() > 0) {
+            // If there is a task here, pull in the information
             id = taskCursor.getInt(0);
             description = taskCursor.getString(1);
             expiredText = taskCursor.getString(2);
             resolutionText = taskCursor.getString(3);
         } else {
+            // If we don't actually have a task, we can build a default error task
             id = -1;
             description = context.getResources().getString(R.string.invalid_task);
             expiredText = description;
-            resolutionText = context.getResources().getString(R.string.invalid_task);
+            resolutionText = context.getResources().getString(R.string.resolve_invalid);
         }
+        // however we build the task, we can create a start and expiration date, and set the filename
         start = DateUtils.getInstance().mkStartDate();
         expiration = DateUtils.getInstance().mkEndDate(start);
         filename = CURRENT_TASKS_BASE + fileCount;
@@ -141,6 +134,7 @@ public class KlyTask {
     void writeTask(Context context) {
         FileOutputStream outputStream;
         try {
+            // The order here is extremely important, since we have to load the data in the same order
             outputStream = context.openFileOutput(filename, Context.MODE_APPEND);
             outputStream.write((description + "\n").getBytes());
             outputStream.write((expiredText + "\n").getBytes());
@@ -149,14 +143,17 @@ public class KlyTask {
             outputStream.write(DateUtils.getInstance().unMkCalendar(expiration).getBytes());
             outputStream.close();
         } catch (IOException e) {
+            // TODO: actually catch this
             e.printStackTrace();
         }
     }
 
+    // Return true if the start date of the task is in the past, false otherwise
     boolean hasStarted() {
         return start.before(Calendar.getInstance());
     }
 
+    // Return true if the expiration date of the task is in the past, false otherwise
     boolean hasExpired() {
         return expiration.before(Calendar.getInstance());
     }

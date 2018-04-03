@@ -36,6 +36,7 @@ public class DateUtils {
         return Integer.parseInt(temp);
     }
 
+    // These get methods parse a date string to retrieve a particular date component
     private int getYear(String date) {
         return subAndParse(date, 0, 4);
     }
@@ -60,10 +61,12 @@ public class DateUtils {
         return subAndParse(date, 17, 19);
     }
 
+    // Formats a year value to have 3 digits, used in the countdown
     String yearFormat(int year) {
         return String.format(Locale.US, "%3d", year);
     }
 
+    // Formats non-year values to have 2 digits, used in the countdown
     String otherFormat(int val) {
         return String.format(Locale.US, "%02d", val);
     }
@@ -74,6 +77,7 @@ public class DateUtils {
         return diffCalendar.get(Calendar.DAY_OF_MONTH);
     }
 
+    // Builds a Calendar object from a formatted date string
     Calendar mkCalendar(String date) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(getYear(date), getMonth(date), getDay(date), getHour(date), getMinute(date), getSecond(date));
@@ -91,6 +95,7 @@ public class DateUtils {
         return date;
     }
 
+    // Formats a value to have 2 digits
     private String formatTwo(int value) {
         return String.format(Locale.US, "%02d", value);
     }
@@ -105,9 +110,7 @@ public class DateUtils {
     // Generate a start date for tasks
     Calendar mkStartDate() {
         Calendar startDate = Calendar.getInstance();
-//        startDate.add(Calendar.HOUR_OF_DAY, (int) (mkDateOffset() * 0.25));
-        // TODO: don't release like this!!!
-        startDate.add(Calendar.MINUTE, 1);
+        startDate.add(Calendar.HOUR_OF_DAY, (int) (mkDateOffset() * 0.25));
         return startDate;
     }
 
@@ -118,6 +121,7 @@ public class DateUtils {
         return endDate;
     }
 
+    // Calculates the difference between two Calendar objects, returns a Calendar object with that difference
     Calendar calcDiff(Calendar later, Calendar earlier) {
         Calendar diffCalendar = (Calendar) later.clone();
         // Calculate the difference

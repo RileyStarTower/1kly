@@ -22,6 +22,7 @@ public class ManifestQueries extends KlyDB {
     private ManifestQueries() {
     }
 
+    // Returns passengers that match a given name string exactly
     public Cursor getByNameID(SQLiteDatabase db, String name) {
         // name is a username coming from the manifest activity,
         // which we can use as an ID because all usernames are unique
@@ -33,11 +34,13 @@ public class ManifestQueries extends KlyDB {
         return runQuery(db, query);
     }
 
+    // Returns passengers that match a given name string approximately
     public Cursor getByNames(SQLiteDatabase db, String names) {
         Cursor cursor = runQuery(db, massageNames(names));
         return cursor;
     }
 
+    // Builds a query out of a set of name strings
     String massageNames(String rawNames) {
         // break up the string by spaces, and match against each one individually;
         String[] names = rawNames.trim().split(" ");
@@ -55,6 +58,7 @@ public class ManifestQueries extends KlyDB {
         return runQuery(db, query);
     }
 
+    // Wrap a name in wildcard characters depending on the length of the name
     @NonNull
     private String wrapName(String name) {
         if (name.length() > 1) {
@@ -66,6 +70,7 @@ public class ManifestQueries extends KlyDB {
         }
     }
 
+    // Returns a breakdown of passenger occupations, and the ratio of each occupation
     public Cursor getOccupationBreakdown(Context context) {
         String query = "SELECT " + MANIFEST_COL_OCC + ", count(" + MANIFEST_COL_NAME +
                 ") as '_id', (SELECT count(*) FROM " + MANIFEST_TABLE_NAME + ") as 'total_count' FROM "
@@ -77,6 +82,7 @@ public class ManifestQueries extends KlyDB {
         return runQuery(manifestDbReadableDatabase, query);
     }
 
+    // Returns the connections of a given passenger
     public Cursor getConnections(SQLiteDatabase db, String username) {
         String query = "SELECT " + MANIFEST_COL_NAME + " as '_id', " + MANIFEST_COL_CONN + " FROM "
                 + MANIFEST_TABLE_CONN + " WHERE " + MANIFEST_COL_NAME + " = '" + username + "'";

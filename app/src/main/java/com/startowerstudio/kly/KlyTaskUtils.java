@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 
 public class KlyTaskUtils {
-    public static final int NOTIFICATION_ID = 1;
+    private static final int NOTIFICATION_ID = 1;
     private static final KlyTaskUtils ourInstance = new KlyTaskUtils();
 
     public static KlyTaskUtils getInstance() {
@@ -27,6 +27,7 @@ public class KlyTaskUtils {
     private KlyTaskUtils() {
     }
 
+    // Returns the next available count value for a task filename
     int getNextCount(ArrayList<KlyTask> taskList) {
         int count = 0;
         int temp;
@@ -44,6 +45,7 @@ public class KlyTaskUtils {
         return count;
     }
 
+    // Returns true if the list contains at least one task with a start date in the past, false otherwise
     boolean hasCurrentTasks(ArrayList<KlyTask> taskList) {
         // check each task in the list to see if it has expired
         for (KlyTask task : taskList) {
@@ -77,6 +79,7 @@ public class KlyTaskUtils {
         return sharedPreferences.getBoolean(SettingsActivity.PREF_NOTIFICATIONS, true);
     }
 
+    // Cancels any existing notifications
     void cancelNotifications(Context context) {
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

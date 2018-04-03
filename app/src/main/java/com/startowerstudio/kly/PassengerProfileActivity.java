@@ -23,22 +23,22 @@ public class PassengerProfileActivity extends KlyActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_profile);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         startCountdown();
 
+        // Load which passenger we're looking at
         Intent intent = getIntent();
         String username = intent.getStringExtra(Manifest.EXTRA_PASSENGER);
-
         Cursor passengerData = loadPassenger(username);
-
         drawPassenger(passengerData);
 
+        // Load the passenger's connections
         Cursor connectionData = loadConnections(username);
-        final ListView listView = (ListView) findViewById(R.id.connectionsList);
+        final ListView listView = findViewById(R.id.connectionsList);
         if (connectionData.getCount() > 0) {
             ProfileAdapter profileAdapter = new ProfileAdapter(this, connectionData);
             listView.setAdapter(profileAdapter);
@@ -48,36 +48,37 @@ public class PassengerProfileActivity extends KlyActivity {
         }
     }
 
+    // Loads the manifest data for a single passenger
     private Cursor loadPassenger(String username) {
         ManifestDatabaseHelper manifestDbHelper = new ManifestDatabaseHelper(this);
         SQLiteDatabase manifestDbWritableDatabase = manifestDbHelper.getWritableDatabase();
         return ManifestQueries.getInstance().getByNameID(manifestDbWritableDatabase, username);
     }
 
+    // Loads the connections for a single passengers
     private Cursor loadConnections(String username) {
         ManifestDatabaseHelper manifestDbHelper = new ManifestDatabaseHelper(this);
         SQLiteDatabase manifestDbReadableDatabase = manifestDbHelper.getReadableDatabase();
         return ManifestQueries.getInstance().getConnections(manifestDbReadableDatabase, username);
     }
 
+    // Displays the passenger's data in the activity
     private void drawPassenger(Cursor passengerData) {
+        // Retrieve the data from the cursor
         final String username = passengerData.getString(passengerData.getColumnIndex(ManifestQueries.getInstance().MANIFEST_COL_NAME));
         final String occupation = passengerData.getString(passengerData.getColumnIndex(ManifestQueries.getInstance().MANIFEST_COL_OCC));
         final String location = passengerData.getString(passengerData.getColumnIndex(ManifestQueries.getInstance().MANIFEST_COL_LOC));
 
-        TextView usernameTextView = (TextView) findViewById(R.id.passengerUsername);
-        usernameTextView.setText(username);
-
-        TextView occupationTextView = (TextView) findViewById(R.id.passengerOccupation);
-        occupationTextView.setText(occupation);
-
-        TextView locationTextView = (TextView) findViewById(R.id.passengerLocation);
-        locationTextView.setText(location);
+        // Set the data in the views
+        updateText((TextView) findViewById(R.id.passengerUsername), username);
+        updateText((TextView) findViewById(R.id.passengerOccupation), occupation);
+        updateText((TextView) findViewById(R.id.passengerLocation), location);
     }
 
+    // Load the manifest activity for the nearby passengers
     public void nearbyPassengers(View view) {
         String location = ((TextView) view).getText().toString();   // get the location string from the view
-        location = '*' + location.substring(1);
+        location = '*' + location.substring(1); // replace the first location value with a wildcard
         Intent intent = new Intent(this, Manifest.class);
         intent.putExtra(EXTRA_LOCATION, location);
         intent.setAction(EXTRA_LOCATION);
@@ -96,10 +97,12 @@ public class PassengerProfileActivity extends KlyActivity {
 
         @Override
         public void bindView(View view, final Context context, Cursor cursor) {
-            TextView textViewUsername = (TextView) view.findViewById(R.id.passengerUsername);
+            // The only thing here is the connection name
+            TextView textViewUsername = view.findViewById(R.id.passengerUsername);
             textViewUsername.setTextColor(getResources().getColor(R.color.dataBlue));
             final String username = cursor.getString(cursor.getColumnIndex(ManifestQueries.getInstance().MANIFEST_COL_CONN));
             textViewUsername.setText(username);
+            // Tapping a connection loads that passengers profile
             textViewUsername.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent intent = new Intent(context, PassengerProfileActivity.class);

@@ -14,7 +14,8 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
-        ScrollView scrollView = (ScrollView) findViewById(R.id.aboutScroll);
+        // This code forces the scrollview to start at the top
+        ScrollView scrollView = findViewById(R.id.aboutScroll);
         scrollView.setFocusableInTouchMode(true);
         scrollView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
     }

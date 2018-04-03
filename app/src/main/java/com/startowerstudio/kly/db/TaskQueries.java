@@ -23,13 +23,14 @@ public class TaskQueries extends KlyDB {
         return getNTasks(context, 1);
     }
 
-    // TODO: fix the day offset
+    // Retrieve a given number of tasks, randomly selected from tasks that haven't been used in the
+    // past 30 days
     public Cursor getNTasks(Context context, int n) {
         // Selects the task description, the expiration text, and the resolution text, for a random task
         String query = "SELECT kt." + TASK_COL_ID + ", kt." + TASK_COL_DESC + ", kc." + CAT_COL_EXP_TEXT + ", kc." + CAT_COL_RES_TEXT +
                 " FROM " + TASK_TABLE_NAME + " kt LEFT OUTER JOIN " +
                 CAT_TABLE_NAME + " kc ON kt." + TASK_COL_CAT + " = kc." + CAT_COL_ID +
-                " WHERE kt." + TASK_COL_DATE + " > strftime(\'%s\', \'now\', \'30 day\')" +  // don't pull in recent tasks
+                " WHERE kt." + TASK_COL_DATE + " < strftime(\'%s\', \'now\', \'-30 day\')" +  // don't pull in recent tasks
                 " ORDER BY RANDOM() LIMIT " + n;
 
         TaskDatabaseHelper taskDbHelper = new TaskDatabaseHelper(context);
@@ -40,6 +41,7 @@ public class TaskQueries extends KlyDB {
         return cursor;
     }
 
+    // Update the most recent use date of a task, so it won't be used again for 30 days
     public void updateTaskDate(Context context, int id) {
         // build the new date
         ContentValues dateColAndVal = new ContentValues(1);

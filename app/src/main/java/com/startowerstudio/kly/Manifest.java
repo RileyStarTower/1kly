@@ -26,7 +26,7 @@ public class Manifest extends KlyActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manifest);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -45,20 +45,24 @@ public class Manifest extends KlyActivity {
         }
 
         if (!EtaCountdown.getInstance().timerUp()) {
+            // If the timer isn't up, then there are still passengers on board that we can look at
             if (query.split(":").length == 4) {
+                // Search by location
                 ManifestAdapter manifestAdapter = new ManifestAdapter(this, getLocationCursor(query));
-                final ListView listView = (ListView) findViewById(R.id.passengerList);
+                final ListView listView = findViewById(R.id.passengerList);
                 listView.setAdapter(manifestAdapter);
                 setListViewHeight(listView);
                 showUI(query);
             } else if (query.length() > 0) {
+                // Search by matching against username
                 ManifestAdapter manifestAdapter = new ManifestAdapter(this, getNamesCursor(query));
-                final ListView listView = (ListView) findViewById(R.id.passengerList);
+                final ListView listView = findViewById(R.id.passengerList);
                 listView.setAdapter(manifestAdapter);
                 setListViewHeight(listView);
                 showUI(query);
             }
         } else {
+            // If the timer is up, then there aren't any passengers to look at
             if (query.length() > 0) {
                 showUI(query);
             }
@@ -118,9 +122,11 @@ public class Manifest extends KlyActivity {
 
         @Override
         public void bindView(View view, final Context context, Cursor cursor) {
-            TextView textViewUsername = (TextView) view.findViewById(R.id.passengerUsername);
+            // Add the passenger username
+            TextView textViewUsername = view.findViewById(R.id.passengerUsername);
             final String username = cursor.getString(cursor.getColumnIndex(ManifestQueries.getInstance().MANIFEST_COL_NAME));
             textViewUsername.setText(username);
+            // Tapping on the passenger loads that passenger's profile
             textViewUsername.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent intent = new Intent(context, PassengerProfileActivity.class);
@@ -129,9 +135,11 @@ public class Manifest extends KlyActivity {
                 }
             });
 
-            TextView textViewLocation = (TextView) view.findViewById(R.id.passengerLocation);
+            // Add the passenger's location
+            TextView textViewLocation = view.findViewById(R.id.passengerLocation);
             final String location = cursor.getString(cursor.getColumnIndex(ManifestQueries.getInstance().MANIFEST_COL_LOC));
             textViewLocation.setText(location);
+            // Tapping on the passenger's location also just loads that passenger's profile
             textViewLocation.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent intent = new Intent(context, PassengerProfileActivity.class);

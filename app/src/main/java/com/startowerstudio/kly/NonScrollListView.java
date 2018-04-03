@@ -9,6 +9,9 @@ import android.widget.ListView;
  * Created by Riley on 3/3/2018.
  * Taken from:
  * http://danosipov.com/?p=604
+ *
+ * This class creates a ListView that doesn't scroll
+ * It is used in breakdown views so we don't have nested scrolling behavior
  */
 
 public class NonScrollListView extends ListView {

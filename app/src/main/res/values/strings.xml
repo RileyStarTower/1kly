@@ -62,7 +62,7 @@
     <string name="past_due">past due</string>
     <string name="resolve_generic">Tap to resolve task.</string>
     <string name="invalid_task">The task management service has encountered a problem. Please contact your system administrator.</string>
-    <string name="resolve_invalid">Tap to dismiss message.</string>
+    <string name="resolve_invalid">dismiss message.</string>
 
     <!--Ship Status activity-->
     <string name="title_activity_ship_status">Ship Status</string>
@@ -87,8 +87,7 @@
     <string name="artist_note_label">Artist\'s Note</string>
     <string name="artist_note_val_1">There are a lot of problems in the world that will likely not be resolved in my lifetime. In many cases, it\'s impossible to know if my actions even impact that resolution. This leads to a big question: how do I motivate myself to approach an issue that I will never see the end of, and might not even be able to affect?</string>
     <string name="artist_note_val_2">This app is a conceptual art piece, presented as a mobile game. There are basically two mechanics in 1 kly: tasks, and the slow march of time. Neither of those will get you to the end, for almost everyone who might read this. Don\'t worry too much, though. Check in when you can. We got this.</string>
-    <string name="artist_note_val_3">k = kilo</string>
-    <string name="artist_note_val_4">ly = light-year</string>
+    <string name="artist_note_val_3">kly is an abbreviation of kilolight-year, a unit equal to 1,000 light-years.</string>
     <string name="license_title">License info:</string>
     <string name="license_1">
         Copyright &#169; 2018 Riley Harris

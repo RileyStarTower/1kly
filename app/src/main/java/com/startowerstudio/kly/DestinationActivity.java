@@ -18,7 +18,7 @@ public class DestinationActivity extends KlyActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_destination);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -26,13 +26,15 @@ public class DestinationActivity extends KlyActivity {
         startCountdown();
 
         if (!EtaCountdown.getInstance().timerUp()) {
+            // If the timer isn't up, display the pre-arrival resident breakdown
             ResidentAdapter breakdownAdapter = new ResidentAdapter(this, ManifestQueries.getInstance().getResidents(this));
-            final NonScrollListView listView = (NonScrollListView) findViewById(R.id.residentList);
+            final NonScrollListView listView = findViewById(R.id.residentList);
             listView.setAdapter(breakdownAdapter);
             setListViewHeight(listView);
         } else {
+            // If the timer is up, display the resident breakdown with the passengers accounted for
             ResidentAdapter breakdownAdapter = new ResidentAdapter(this, ManifestQueries.getInstance().getEndResidents(this));
-            final NonScrollListView listView = (NonScrollListView) findViewById(R.id.residentList);
+            final NonScrollListView listView = findViewById(R.id.residentList);
             listView.setAdapter(breakdownAdapter);
             setListViewHeight(listView);
         }
@@ -50,7 +52,8 @@ public class DestinationActivity extends KlyActivity {
 
         @Override
         public void bindView(View view, final Context context, Cursor cursor) {
-            TextView textViewType = (TextView) view.findViewById(R.id.breakdownName);
+            // Add the resident type to the breakdown view
+            TextView textViewType = view.findViewById(R.id.breakdownName);
             final String type = cursor.getString(cursor.getColumnIndex("_id"));
             textViewType.setText(type);
             textViewType.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +63,8 @@ public class DestinationActivity extends KlyActivity {
                 }
             });
 
-            TextView textViewCount = (TextView) view.findViewById(R.id.breakdownCount);
+            // Add the count for the given resident type to the breakdown view
+            TextView textViewCount = view.findViewById(R.id.breakdownCount);
             final String count = cursor.getString(cursor.getColumnIndex("count"));
             textViewCount.setText(count);
             textViewCount.setOnClickListener(new View.OnClickListener() {

@@ -35,7 +35,7 @@ public class ShipStatus extends KlyActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ship_status);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -47,27 +47,27 @@ public class ShipStatus extends KlyActivity {
             // If the timer isn't up, show everything
             BreakdownAdapter breakdownAdapter = new BreakdownAdapter(this,
                     ManifestQueries.getInstance().getOccupationBreakdown(this));
-            final NonScrollListView listView = (NonScrollListView) findViewById(R.id.breakdownList);
+            final NonScrollListView listView = findViewById(R.id.breakdownList);
             listView.setAdapter(breakdownAdapter);
             // Set the height of the ListView so it doesn't have to scroll
             setListViewHeight(listView);
 
             // Setting the height of the ListView gives it focus, so reset it afterward
-            ScrollView scrollView = (ScrollView) findViewById(R.id.aboutScroll);
+            ScrollView scrollView = findViewById(R.id.aboutScroll);
             scrollView.setFocusableInTouchMode(true);
             scrollView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
         } else {
             // If the timer is up, don't show the breakdown, and reset a bunch of the text
-            TextView textView = (TextView) findViewById(R.id.currentSpeedVal);
+            TextView textView = findViewById(R.id.currentSpeedVal);
             textView.setText(R.string.null_string);
             textView.setTextColor(getResources().getColor(R.color.nullText));
-            textView = (TextView) findViewById(R.id.averageSpeedVal);
+            textView = findViewById(R.id.averageSpeedVal);
             textView.setText(R.string.null_string);
             textView.setTextColor(getResources().getColor(R.color.nullText));
-            textView = (TextView) findViewById(R.id.healthVal);
+            textView = findViewById(R.id.healthVal);
             textView.setText(R.string.null_string);
             textView.setTextColor(getResources().getColor(R.color.nullText));
-            textView = (TextView) findViewById(R.id.riskVal);
+            textView = findViewById(R.id.riskVal);
             textView.setText(R.string.null_string);
             textView.setTextColor(getResources().getColor(R.color.nullText));
 
@@ -146,6 +146,8 @@ public class ShipStatus extends KlyActivity {
         handlerElapsed.postDelayed(runnableElapsed, 0);
     }
 
+    // This function adds some small dynamic behavior the "Under observation" field,
+    // so it looks like passengers are actually being treated and brought back in
     private void updateObservation() {
         // load file
         BufferedReader fileIn;
@@ -169,6 +171,7 @@ public class ShipStatus extends KlyActivity {
 
             if (Calendar.getInstance().after(endTime)) {
                 // update the count and time
+                // TODO: maybe make this biased toward removing passengers? so there aren't always passengers under observation?
                 count += rnd.nextBoolean() ? 1 : -1;    // randomly add or remove a passenger
                 count = count < 0 ? 0 : count;          // if count goes below 0, reset it to 0
                 endTime = Calendar.getInstance();
@@ -192,6 +195,7 @@ public class ShipStatus extends KlyActivity {
         updateText((TextView) findViewById(R.id.riskVal), Integer.toString(count));
     }
 
+    // Writes the observation data to file
     private void writeObservation(Calendar endTime, int count) {
         try {
             FileOutputStream outputStream = openFileOutput(OBSERVATION_FILEPATH, MODE_PRIVATE);
@@ -215,7 +219,8 @@ public class ShipStatus extends KlyActivity {
 
         @Override
         public void bindView(View view, final Context context, Cursor cursor) {
-            TextView textViewOccupation = (TextView) view.findViewById(R.id.breakdownName);
+            // Load the occupation name
+            TextView textViewOccupation = view.findViewById(R.id.breakdownName);
             final String occupation = cursor.getString(cursor.getColumnIndex(ManifestQueries.getInstance().MANIFEST_COL_OCC));
             textViewOccupation.setText(occupation);
             textViewOccupation.setOnClickListener(new View.OnClickListener() {
@@ -225,8 +230,8 @@ public class ShipStatus extends KlyActivity {
                 }
             });
 
-            TextView textViewCount = (TextView) view.findViewById(R.id.breakdownCount);
-            // I probably shouldn't call this column "_id" but, it makes things easier, I guess
+            // Load and calculate the ratio for each occupation
+            TextView textViewCount = view.findViewById(R.id.breakdownCount);
             final double count = cursor.getInt(cursor.getColumnIndex("_id"));
             final double total = cursor.getInt(cursor.getColumnIndex("total_count"));
             double percent = (count / total) * 100;

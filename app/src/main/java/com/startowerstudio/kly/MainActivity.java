@@ -27,9 +27,6 @@ public class MainActivity extends KlyActivity {
 
         startCountdown();
 
-        // TODO: only here for testing purposes
-//        deleteFiles();
-
         if (!EtaCountdown.getInstance().timerUp()) {
             taskList = loadTasks();
 
@@ -39,7 +36,7 @@ public class MainActivity extends KlyActivity {
                 Cursor taskCursor = TaskQueries.getInstance().getOneTask(this);
 
                 // create a task unless we didn't get anything back (can happen if all tasks have been used recently
-//                if (taskCursor.getCount() > -1) {
+                if (taskCursor.getCount() > 0) {
                     // create the task
                     int count = KlyTaskUtils.getInstance().getNextCount(taskList);
                     KlyTask task = new KlyTask(taskCursor, count, this);
@@ -49,17 +46,17 @@ public class MainActivity extends KlyActivity {
 
                     // now schedule the task
                     KlyTaskUtils.getInstance().scheduleNotification(this, task, new Handler());
-//                }
+                }
             }
 
             updateTasksButton();
         } else {
-            deleteFiles();
+            deleteTaskFiles();
         }
     }
 
-    // TODO: this is only for testing purposes
-    private void deleteFiles() {
+    // Deletes all files representing current tasks
+    private void deleteTaskFiles() {
         String[] fileList = getFilesDir().list();
         File dir = getFilesDir();
         for (String f:fileList) {
@@ -92,15 +89,20 @@ public class MainActivity extends KlyActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // Adds the number of current tasks to the button text
+    // It would be cool if this updated in real time,
+    // but I'm not going to take the time to do that
     private void updateTasksButton() {
         int count = 0;
         String countString;
         Button taskButton = (Button) findViewById(R.id.tasks);
 
+        // count up the number of current tasks
         for (KlyTask task : taskList) {
             if (task.hasStarted()) count++;
         }
 
+        // build a string for the task count
         if (count < 1) {
             countString = "";
         } else if (count <= 9) {
@@ -108,19 +110,17 @@ public class MainActivity extends KlyActivity {
         } else {
             countString = " (9+)";
         }
+
+        // update the button text
         String taskLabel = getResources().getText(R.string.title_activity_tasks) + countString;
         taskButton.setText(taskLabel);
     }
 
+    // Activity redirection functions from here down
     public void tasksButton(View view) {
         Intent intent = new Intent(this, Tasks.class);
         startActivity(intent);
     }
-
-//    public void actStatus(View view) {
-//        Intent intent = new Intent(this, ShipStatus.class);
-//        startActivity(intent);
-//    }
 
     public void btnManifest(View view) {
         Intent intent = new Intent(this, Manifest.class);

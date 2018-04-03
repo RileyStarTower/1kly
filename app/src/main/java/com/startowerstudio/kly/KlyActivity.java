@@ -122,6 +122,7 @@ public class KlyActivity extends AppCompatActivity {
         }
 
         int totalHeight = 0;
+        // Loop over all elements in the list, and add up their height
         for (int i = 0; i < listAdapter.getCount(); i++) {
             View listItem = listAdapter.getView(i, null, listView);
             listItem.measure(0, 0);
@@ -129,6 +130,7 @@ public class KlyActivity extends AppCompatActivity {
             totalHeight += listItem.getMeasuredHeight();
         }
 
+        // Reset the height of the ListView
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight;
         listView.setLayoutParams(params);
@@ -153,6 +155,7 @@ public class KlyActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    // This navigation is possible from multiple activities, so it lives in the base class
     public void actStatus(View view) {
         Intent intent = new Intent(this, ShipStatus.class);
         startActivity(intent);
