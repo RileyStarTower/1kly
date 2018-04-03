@@ -1,8 +1,10 @@
 package com.startowerstudio.kly;
 
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -11,5 +13,9 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
+        ScrollView scrollView = (ScrollView) findViewById(R.id.aboutScroll);
+        scrollView.setFocusableInTouchMode(true);
+        scrollView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
     }
 }

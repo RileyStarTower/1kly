@@ -53,7 +53,7 @@ public class ShipStatus extends KlyActivity {
             setListViewHeight(listView);
 
             // Setting the height of the ListView gives it focus, so reset it afterward
-            ScrollView scrollView = (ScrollView) findViewById(R.id.statusScroll);
+            ScrollView scrollView = (ScrollView) findViewById(R.id.aboutScroll);
             scrollView.setFocusableInTouchMode(true);
             scrollView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
         } else {

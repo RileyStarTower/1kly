@@ -6,6 +6,7 @@
     <color name="buttonText">#707070</color>
     <color name="buttonBackground">#ffffff</color>
     <color name="nullText">@android:color/darker_gray</color>
+    <color name="backgroundLicense">#e8e8e8</color>
     <color name="backgroundDefault">#fafafa</color>
     <color name="dataBlue">#1d83e9</color>
     <color name="taskBackground">#f8faff</color>

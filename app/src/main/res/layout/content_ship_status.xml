@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:id="@+id/statusScroll"
+    android:id="@+id/aboutScroll"
     android:layout_marginTop="?android:attr/actionBarSize"
     android:background="@drawable/kly_ship_cropped_static"
     >

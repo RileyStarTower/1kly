@@ -1,5 +1,4 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
     <dimen name="countdown_height">64dp</dimen>
     <dimen name="countdown_number_size">25sp</dimen>
     <dimen name="countdown_label_size">14sp</dimen>
