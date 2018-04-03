@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion '27.0.3'
     defaultConfig {
-        applicationId "com.sts.riley.a1kly"
+        applicationId "com.startowerstudio.kly"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
