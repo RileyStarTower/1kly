@@ -76,7 +76,7 @@ public class Tasks extends KlyActivity {
         String[] fileList = getFilesDir().list();
         for (String filename : fileList) {
             // only go through the "currentTask" files
-            if (!validCurrentTask(filename)) continue;
+            if (invalidCurrentTask(filename)) continue;
             // make a KlyTask for each valid task file
             task = new KlyTask(filename, this);
             // only include tasks that have started

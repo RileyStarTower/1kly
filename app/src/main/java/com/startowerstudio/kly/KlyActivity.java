@@ -51,8 +51,8 @@ public class KlyActivity extends AppCompatActivity {
                 handler.postDelayed(this, 1000);
                 try {
                     Calendar currentCalendar = Calendar.getInstance();
-                    if (!EtaCountdown.getInstance().timerUp(currentCalendar)) {
-                        Calendar diffCalendar = EtaCountdown.getInstance().getCopy();
+                    if (DateUtils.getInstance().timerActive(currentCalendar)) {
+                        Calendar diffCalendar = DateUtils.getInstance().getCopy();
                         // Calculate the difference
                         diffCalendar = DateUtils.getInstance().calcDiff(diffCalendar, currentCalendar);
                         // Display the result
@@ -63,12 +63,12 @@ public class KlyActivity extends AppCompatActivity {
                         updateText(months, DateUtils.getInstance().otherFormat(diffCalendar.get(Calendar.MONTH)));
                         updateText(years, DateUtils.getInstance().yearFormat(diffCalendar.get(Calendar.YEAR)));
                     } else {
-                        years.setText("000");
-                        months.setText("00");
-                        days.setText("00");
-                        hours.setText("00");
-                        minutes.setText("00");
-                        seconds.setText("00");
+                        years.setText(R.string.triple_zero);
+                        months.setText(R.string.double_zero);
+                        days.setText(R.string.double_zero);
+                        hours.setText(R.string.double_zero);
+                        minutes.setText(R.string.double_zero);
+                        seconds.setText(R.string.double_zero);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -84,15 +84,15 @@ public class KlyActivity extends AppCompatActivity {
 
     // TODO: consider moving this to KlyTaskUtils
     // The filename must contain the correct prefix to be considered
-    protected boolean validCurrentTask(String filename) {
+    protected boolean invalidCurrentTask(String filename) {
         int length = KlyTask.CURRENT_TASKS_BASE.length();
 
         // if the filename is too short, it won't match
-        if (filename.length() < length) return false;
+        if (filename.length() < length) return true;
 
         // the filename prefix needs to match
         String prefix = filename.substring(0, length);
-        return prefix.equals(KlyTask.CURRENT_TASKS_BASE);
+        return !prefix.equals(KlyTask.CURRENT_TASKS_BASE);
     }
 
     // TODO: consider moving this to KlyTaskUtils
@@ -105,7 +105,7 @@ public class KlyActivity extends AppCompatActivity {
         String[] fileList = getFilesDir().list();
         for (String filename : fileList) {
             // only go through the "currentTask" files
-            if (!validCurrentTask(filename)) continue;
+            if (invalidCurrentTask(filename)) continue;
             // make a KlyTask for each valid task file
             task = new KlyTask(filename, this);
             taskList.add(task);

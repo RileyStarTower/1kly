@@ -18,10 +18,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/buttonText"
-            android:textSize="18sp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingTop="8dp"/>
+            android:textSize="@dimen/adapter_text"
+            android:paddingStart="@dimen/standard_padding"
+            android:paddingEnd="@dimen/standard_padding"
+            android:paddingTop="@dimen/standard_padding"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,17 +31,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
+                android:paddingStart="@dimen/standard_padding"
+                android:paddingEnd="@dimen/standard_padding"
                 android:id="@+id/expirationLabel"
                 android:text="@string/expiration_date"
-                android:textSize="16sp" />
+                android:textSize="@dimen/standard_label" />
 
             <TextView
                 android:id="@+id/expirationDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp" />
+                android:textSize="@dimen/standard_label" />
         </LinearLayout>
 
         <TextView
@@ -50,9 +50,9 @@
             android:layout_height="wrap_content"
             android:textColor="@color/dataBlue"
             android:textStyle="italic"
-            android:textSize="16sp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingBottom="8dp" />
+            android:textSize="@dimen/standard_label"
+            android:paddingStart="@dimen/standard_padding"
+            android:paddingEnd="@dimen/standard_padding"
+            android:paddingBottom="@dimen/standard_padding" />
     </LinearLayout>
 </LinearLayout>

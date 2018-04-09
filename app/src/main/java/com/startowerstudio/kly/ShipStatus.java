@@ -43,7 +43,7 @@ public class ShipStatus extends KlyActivity {
         startCountdown();
         startElapsed();
 
-        if (!EtaCountdown.getInstance().timerUp()) {
+        if (DateUtils.getInstance().timerActive()) {
             // If the timer isn't up, show everything
             BreakdownAdapter breakdownAdapter = new BreakdownAdapter(this,
                     ManifestQueries.getInstance().getOccupationBreakdown(this));
@@ -112,8 +112,8 @@ public class ShipStatus extends KlyActivity {
                 handlerElapsed.postDelayed(this, 1000);
                 try {
                     Calendar currentCalendar = Calendar.getInstance();
-                    if (!EtaCountdown.getInstance().timerUp(currentCalendar)) {
-                        Calendar departure = EtaCountdown.getInstance().getDeparture();
+                    if (DateUtils.getInstance().timerActive(currentCalendar)) {
+                        Calendar departure = DateUtils.getInstance().getDeparture();
                         DateUtils.getInstance().updateCalendar(currentCalendar, departure, Calendar.SECOND);
                         DateUtils.getInstance().updateCalendar(currentCalendar, departure, Calendar.MINUTE);
                         DateUtils.getInstance().updateCalendar(currentCalendar, departure, Calendar.HOUR_OF_DAY);
@@ -130,12 +130,12 @@ public class ShipStatus extends KlyActivity {
                         // now that the time text fields are filled out, we can use them to update the other text fields
                         fillOutUI();
                     } else {
-                        yearsElapsed.setText("000");
-                        monthsElapsed.setText("00");
-                        daysElapsed.setText("00");
-                        hoursElapsed.setText("00");
-                        minutesElapsed.setText("00");
-                        secondsElapsed.setText("00");
+                        yearsElapsed.setText(R.string.triple_zero);
+                        monthsElapsed.setText(R.string.double_zero);
+                        daysElapsed.setText(R.string.double_zero);
+                        hoursElapsed.setText(R.string.double_zero);
+                        minutesElapsed.setText(R.string.double_zero);
+                        secondsElapsed.setText(R.string.double_zero);
                         fillOutUI();
                     }
                 } catch (Exception e) {
@@ -175,8 +175,7 @@ public class ShipStatus extends KlyActivity {
                 count += rnd.nextBoolean() ? 1 : -1;    // randomly add or remove a passenger
                 count = count < 0 ? 0 : count;          // if count goes below 0, reset it to 0
                 endTime = Calendar.getInstance();
-                // TODO: maybe make this a function? since it's reused?
-                endTime.add(Calendar.MINUTE, (int) Math.floor(1440 + (2160 * rnd.nextDouble()))); // add between 1 and 2.5 days
+                updateEndTime(endTime, rnd);
 
                 // write the new data back to the file
                 writeObservation(endTime, count);
@@ -185,7 +184,7 @@ public class ShipStatus extends KlyActivity {
             // no file, create file
             count = 2; // default count is 2
             endTime = Calendar.getInstance();
-            endTime.add(Calendar.MINUTE, (int) Math.floor(1440 + (2160 * rnd.nextDouble()))); // add between 1 and 2.5 days
+            updateEndTime(endTime, rnd);
 
             // write the new data back to the file
             // TODO: don't have a nested try here, come on... ok, but it still is a nested try...
@@ -193,6 +192,11 @@ public class ShipStatus extends KlyActivity {
         }
 
         updateText((TextView) findViewById(R.id.riskVal), Integer.toString(count));
+    }
+
+    // Create a new end time for the "Under observation" field
+    private void updateEndTime(Calendar endTime, Random rnd) {
+        endTime.add(Calendar.MINUTE, (int) Math.floor(1440 + (2160 * rnd.nextDouble())));  // add between 1 and 2.5 days
     }
 
     // Writes the observation data to file

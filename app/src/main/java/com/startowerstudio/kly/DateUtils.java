@@ -21,12 +21,20 @@ import java.util.Locale;
 public class DateUtils {
     private static final DateUtils ourInstance = new DateUtils();
     private static final int HOURS_IN_MONTH = 720;
+    private Calendar etaCalendar, departureCalendar;
 
     static DateUtils getInstance() {
         return ourInstance;
     }
 
     private DateUtils() {
+        etaCalendar = Calendar.getInstance();
+        etaCalendar.clear();
+        etaCalendar.set(3002, 6, 30, 23, 58, 58);
+
+        departureCalendar = Calendar.getInstance();
+        departureCalendar.clear();
+        departureCalendar.set(2004, 4, 17, 11, 45, 0);
     }
 
     // Helper method to get a substring and parse out the integer
@@ -139,6 +147,22 @@ public class DateUtils {
     void updateCalendar(Calendar diffCalendar, Calendar currentCalendar, int field) {
         int val = -1 * currentCalendar.get(field);
         diffCalendar.add(field, val);
+    }
+
+    boolean timerActive(Calendar currentCalendar) {
+        return currentCalendar.before(etaCalendar);
+    }
+
+    boolean timerActive() {
+        return Calendar.getInstance().before(etaCalendar);
+    }
+
+    Calendar getCopy() {
+        return (Calendar) etaCalendar.clone();
+    }
+
+    Calendar getDeparture() {
+        return (Calendar) departureCalendar.clone();
     }
 
 }

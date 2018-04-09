@@ -22,30 +22,32 @@ public class MainActivity extends KlyActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         startCountdown();
 
-        if (!EtaCountdown.getInstance().timerUp()) {
+        if (DateUtils.getInstance().timerActive()) {
             taskList = loadTasks();
 
             // maximum of 10 tasks to keep things reasonable to look at
-            if (taskList.size() < 10) {
+            if (taskList.size() < 20) {
                 // execute the query to get a new task
-                Cursor taskCursor = TaskQueries.getInstance().getOneTask(this);
+                Cursor taskCursor = TaskQueries.getInstance().getNTasks(this, 20 - taskList.size());
 
                 // create a task unless we didn't get anything back (can happen if all tasks have been used recently
                 if (taskCursor.getCount() > 0) {
-                    // create the task
-                    int count = KlyTaskUtils.getInstance().getNextCount(taskList);
-                    KlyTask task = new KlyTask(taskCursor, count, this);
-                    TaskQueries.getInstance().updateTaskDate(this, task.getId());
-                    task.writeTask(this);
-                    taskList.add(task);
+                    // create the tasks
+                    while (taskCursor.moveToNext()) {
+                        int count = KlyTaskUtils.getInstance().getNextCount(taskList);
+                        KlyTask task = new KlyTask(taskCursor, count, this);
+                        TaskQueries.getInstance().updateTaskDate(this, task.getId());
+                        task.writeTask(this);
+                        taskList.add(task);
 
-                    // now schedule the task
-                    KlyTaskUtils.getInstance().scheduleNotification(this, task, new Handler());
+                        // now schedule the task
+                        KlyTaskUtils.getInstance().scheduleNotification(this, task, new Handler());
+                    }
                 }
             }
 
@@ -80,7 +82,6 @@ public class MainActivity extends KlyActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        // TODO go to the walk-through activity. Should it be called "About" since it will have other stuff too?
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -95,7 +96,7 @@ public class MainActivity extends KlyActivity {
     private void updateTasksButton() {
         int count = 0;
         String countString;
-        Button taskButton = (Button) findViewById(R.id.tasks);
+        Button taskButton = findViewById(R.id.tasks);
 
         // count up the number of current tasks
         for (KlyTask task : taskList) {

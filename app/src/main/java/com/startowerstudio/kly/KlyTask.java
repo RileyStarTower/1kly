@@ -53,7 +53,6 @@ public class KlyTask {
         return expiration;
     }
 
-    // TODO: return the rest of the thing as well
     @Override
     public String toString() {
         return "KlyTask{" +
@@ -67,8 +66,8 @@ public class KlyTask {
      */
 
     // Direct constructor takes three strings, and we build Calendar
-    // objects out of the second and third
-    // TODO: mostly just used for testing...
+    // objects out of the second and third.
+    // Only used for testing
     KlyTask(String description, String filename, String expiredText, String resolutionText) {
         this.description = description;
         this.filename = filename;

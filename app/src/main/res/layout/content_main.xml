@@ -9,22 +9,22 @@
     tools:context="com.startowerstudio.kly.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <ImageView
-        android:layout_width="163dp"
-        android:layout_height="487dp"
-        android:adjustViewBounds="true"
-        android:cropToPadding="false"
-        android:padding="0dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/kly_ship_cropped_blue"
-        android:contentDescription="@string/ship_description"
-        />
+    <!--<ImageView-->
+        <!--android:layout_width="163dp"-->
+        <!--android:layout_height="487dp"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--android:cropToPadding="false"-->
+        <!--android:padding="0dp"-->
+        <!--android:scaleType="fitXY"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintVertical_bias="1.0"-->
+        <!--app:srcCompat="@drawable/kly_ship_cropped_blue"-->
+        <!--android:contentDescription="@string/ship_description"-->
+        <!--/>-->
 
     <include layout="@layout/countdown"
         android:id="@+id/countdown"
@@ -43,7 +43,7 @@
         android:textAlignment="viewStart"
         android:textAllCaps="false"
         android:textColor="@color/buttonText"
-        android:textSize="24sp"
+        android:textSize="@dimen/standard_data"
         android:typeface="normal"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -62,7 +62,7 @@
         android:textAlignment="viewStart"
         android:textAllCaps="false"
         android:textColor="@color/buttonText"
-        android:textSize="24sp"
+        android:textSize="@dimen/standard_data"
         android:typeface="normal"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -81,7 +81,7 @@
         android:textAlignment="viewStart"
         android:textAllCaps="false"
         android:textColor="@color/buttonText"
-        android:textSize="24sp"
+        android:textSize="@dimen/standard_data"
         android:typeface="normal"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -100,7 +100,7 @@
         android:textAlignment="viewStart"
         android:textAllCaps="false"
         android:textColor="@color/buttonText"
-        android:textSize="24sp"
+        android:textSize="@dimen/standard_data"
         android:typeface="normal"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"

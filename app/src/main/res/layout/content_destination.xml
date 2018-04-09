@@ -9,22 +9,22 @@
     tools:context="com.startowerstudio.kly.DestinationActivity"
     tools:showIn="@layout/activity_destination">
 
-    <ImageView
-        android:layout_width="163dp"
-        android:layout_height="487dp"
-        android:adjustViewBounds="true"
-        android:cropToPadding="false"
-        android:padding="0dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/kly_ship_cropped_blue"
-        android:contentDescription="@string/ship_description"
-        />
+    <!--<ImageView-->
+        <!--android:layout_width="163dp"-->
+        <!--android:layout_height="487dp"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--android:cropToPadding="false"-->
+        <!--android:padding="0dp"-->
+        <!--android:scaleType="fitXY"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintVertical_bias="1.0"-->
+        <!--app:srcCompat="@drawable/kly_ship_cropped_blue"-->
+        <!--android:contentDescription="@string/ship_description"-->
+        <!--/>-->
 
     <include layout="@layout/countdown"
         android:id="@+id/countdown"
@@ -38,25 +38,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/residentHealthContainer"
         android:orientation="vertical"
-        android:elevation="2dp"
+        android:elevation="@dimen/standard_elevation"
         android:onClick="loginDialog"
         app:layout_constraintTop_toBottomOf="@+id/countdown"
         app:layout_constraintLeft_toLeftOf="@+id/countdown"
         app:layout_constraintRight_toLeftOf="@+id/infrastructureContainer"
         android:background="@color/backgroundDefault"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginTop="@dimen/standard_padding"
+        android:layout_marginEnd="@dimen/half_padding"
         >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/residentHealthLabel"
-            android:padding="8dp"
+            android:padding="@dimen/standard_padding"
             android:text="@string/resident_health_label"
             android:textColor="@color/buttonText"
-            android:textSize="16sp"
+            android:textSize="@dimen/standard_label"
             app:layout_constraintLeft_toLeftOf="parent"
             />
 
@@ -66,8 +65,9 @@
             android:id="@+id/residentHealthVal"
             android:text="@string/null_string"
             android:textColor="@android:color/darker_gray"
-            android:textSize="24sp"
-            android:paddingLeft="8dp"
+            android:textSize="@dimen/standard_data"
+            android:paddingStart="@dimen/standard_padding"
+            android:paddingEnd="0dp"
             android:paddingBottom="@dimen/standard_padding"
             app:layout_constraintLeft_toLeftOf="parent"
             />
@@ -79,25 +79,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/infrastructureContainer"
         android:orientation="vertical"
-        android:elevation="2dp"
+        android:elevation="@dimen/standard_elevation"
         android:onClick="loginDialog"
         app:layout_constraintTop_toBottomOf="@+id/countdown"
         app:layout_constraintRight_toRightOf="@+id/countdown"
         app:layout_constraintLeft_toRightOf="@id/residentHealthContainer"
         android:background="@color/backgroundDefault"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginTop="@dimen/standard_padding"
+        android:layout_marginStart="@dimen/half_padding"
         >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/infrastructureLabel"
-            android:padding="8dp"
+            android:padding="@dimen/standard_padding"
             android:text="@string/infrastructure_label"
             android:textColor="@color/buttonText"
-            android:textSize="16sp"
+            android:textSize="@dimen/standard_label"
             app:layout_constraintLeft_toLeftOf="parent"
             />
 
@@ -107,8 +106,9 @@
             android:id="@+id/infrastructureVal"
             android:text="@string/infrastructure_val"
             android:textColor="@color/greenLight"
-            android:textSize="24sp"
-            android:paddingLeft="8dp"
+            android:textSize="@dimen/standard_data"
+            android:paddingStart="@dimen/standard_padding"
+            android:paddingEnd="0dp"
             android:paddingBottom="@dimen/standard_padding"
             app:layout_constraintLeft_toLeftOf="parent"
             />
@@ -120,25 +120,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/localPerceptionContainer"
         android:orientation="vertical"
-        android:elevation="2dp"
+        android:elevation="@dimen/standard_elevation"
         android:onClick="loginDialog"
         app:layout_constraintTop_toBottomOf="@+id/residentHealthContainer"
         app:layout_constraintLeft_toLeftOf="@+id/countdown"
         app:layout_constraintRight_toLeftOf="@id/nonHumanPerceptionContainer"
         android:background="@color/backgroundDefault"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginTop="@dimen/standard_padding"
+        android:layout_marginEnd="@dimen/half_padding"
         >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/localPerceptionLabel"
-            android:padding="8dp"
+            android:padding="@dimen/standard_padding"
             android:text="@string/local_perception_label"
             android:textColor="@color/buttonText"
-            android:textSize="16sp"
+            android:textSize="@dimen/standard_label"
             app:layout_constraintLeft_toLeftOf="parent"
             />
 
@@ -148,8 +147,9 @@
             android:id="@+id/localPerceptionVal"
             android:text="@string/null_string"
             android:textColor="@color/nullText"
-            android:textSize="24sp"
-            android:paddingLeft="8dp"
+            android:textSize="@dimen/standard_data"
+            android:paddingStart="@dimen/standard_padding"
+            android:paddingEnd="0dp"
             android:paddingBottom="@dimen/standard_padding"
             app:layout_constraintLeft_toLeftOf="parent"
             />
@@ -161,25 +161,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/nonHumanPerceptionContainer"
         android:orientation="vertical"
-        android:elevation="2dp"
+        android:elevation="@dimen/standard_elevation"
         android:onClick="loginDialog"
         app:layout_constraintTop_toBottomOf="@+id/infrastructureContainer"
         app:layout_constraintRight_toRightOf="@+id/countdown"
         app:layout_constraintLeft_toRightOf="@id/localPerceptionContainer"
         android:background="@color/backgroundDefault"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginTop="@dimen/standard_padding"
+        android:layout_marginStart="@dimen/half_padding"
         >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/nonHumanPerceptionLabel"
-            android:padding="8dp"
+            android:padding="@dimen/standard_padding"
             android:text="@string/non_human_perception_label"
             android:textColor="@color/buttonText"
-            android:textSize="16sp"
+            android:textSize="@dimen/standard_label"
             app:layout_constraintLeft_toLeftOf="parent"
             />
 
@@ -189,10 +188,8 @@
             android:id="@+id/nonHumanPerceptionVal"
             android:text="@string/null_string"
             android:textColor="@color/nullText"
-            android:textSize="24sp"
-            android:paddingLeft="8dp"
-            android:paddingStart="8dp"
-            android:paddingRight="0dp"
+            android:textSize="@dimen/standard_data"
+            android:paddingStart="@dimen/standard_padding"
             android:paddingEnd="0dp"
             android:paddingBottom="@dimen/standard_padding"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -203,15 +200,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/standard_padding"
         android:id="@+id/residentLabel"
         android:text="@string/demographics_label"
-        android:textSize="18sp"
+        android:textSize="@dimen/adapter_text"
         android:textColor="@android:color/darker_gray"
         android:background="@color/backgroundDefault"
-        android:paddingLeft="8dp"
-        android:paddingStart="8dp"
-        android:paddingRight="0dp"
+        android:paddingStart="@dimen/standard_padding"
         android:paddingEnd="0dp"
         android:elevation="@dimen/standard_elevation"
         app:layout_constraintTop_toBottomOf="@id/localPerceptionContainer"
@@ -222,7 +217,7 @@
         android:layout_height="0dp"
         android:id="@+id/residentList"
         android:layout_marginBottom="0dp"
-        android:elevation="2dp"
+        android:elevation="@dimen/standard_elevation"
         android:background="@color/backgroundDefault"
         android:divider="@null"
         android:dividerHeight="0dp"
@@ -239,25 +234,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/localFaunaContainer"
         android:orientation="vertical"
-        android:elevation="2dp"
+        android:elevation="@dimen/standard_elevation"
         android:onClick="loginDialog"
         app:layout_constraintTop_toBottomOf="@+id/residentList"
         app:layout_constraintLeft_toLeftOf="@+id/countdown"
         app:layout_constraintRight_toLeftOf="@id/residentFaunaContainer"
         android:background="@color/backgroundDefault"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginTop="@dimen/standard_padding"
+        android:layout_marginEnd="@dimen/half_padding"
         >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/localFaunaLabel"
-            android:padding="8dp"
+            android:padding="@dimen/standard_padding"
             android:text="@string/local_flora_label"
             android:textColor="@color/buttonText"
-            android:textSize="16sp"
+            android:textSize="@dimen/standard_label"
             app:layout_constraintLeft_toLeftOf="parent"
             />
 
@@ -267,8 +261,9 @@
             android:id="@+id/localFaunaVal"
             android:text="@string/null_string"
             android:textColor="@android:color/darker_gray"
-            android:textSize="24sp"
-            android:paddingLeft="8dp"
+            android:textSize="@dimen/standard_data"
+            android:paddingStart="@dimen/standard_padding"
+            android:paddingEnd="0dp"
             android:paddingBottom="@dimen/standard_padding"
             app:layout_constraintLeft_toLeftOf="parent"
             />
@@ -280,25 +275,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/residentFaunaContainer"
         android:orientation="vertical"
-        android:elevation="2dp"
+        android:elevation="@dimen/standard_elevation"
         android:onClick="loginDialog"
         app:layout_constraintTop_toBottomOf="@+id/residentList"
         app:layout_constraintRight_toRightOf="@+id/countdown"
         app:layout_constraintLeft_toRightOf="@id/localFaunaContainer"
         android:background="@color/backgroundDefault"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginTop="@dimen/standard_padding"
+        android:layout_marginStart="@dimen/half_padding"
         >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/residentFaunaLabel"
-            android:padding="8dp"
+            android:padding="@dimen/standard_padding"
             android:text="@string/resident_flora_label"
             android:textColor="@color/buttonText"
-            android:textSize="16sp"
+            android:textSize="@dimen/standard_label"
             app:layout_constraintLeft_toLeftOf="parent"
             />
 
@@ -308,10 +302,8 @@
             android:id="@+id/residentFaunaVal"
             android:text="@string/resident_flora_val"
             android:textColor="@color/greenLight"
-            android:textSize="24sp"
-            android:paddingLeft="8dp"
-            android:paddingStart="8dp"
-            android:paddingRight="0dp"
+            android:textSize="@dimen/standard_data"
+            android:paddingStart="@dimen/standard_padding"
             android:paddingEnd="0dp"
             android:paddingBottom="@dimen/standard_padding"
             app:layout_constraintLeft_toLeftOf="parent"

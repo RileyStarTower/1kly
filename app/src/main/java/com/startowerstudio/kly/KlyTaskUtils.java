@@ -74,7 +74,7 @@ public class KlyTaskUtils {
     }
 
     // Returns whether notifications for new tasks are turned on
-    Boolean isNotificationsOn(Context context) {
+    private Boolean isNotificationsOn(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPreferences.getBoolean(SettingsActivity.PREF_NOTIFICATIONS, true);
     }

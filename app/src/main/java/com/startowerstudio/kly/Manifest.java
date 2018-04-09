@@ -44,7 +44,7 @@ public class Manifest extends KlyActivity {
             query = intent.getStringExtra(PassengerProfileActivity.EXTRA_LOCATION);
         }
 
-        if (!EtaCountdown.getInstance().timerUp()) {
+        if (DateUtils.getInstance().timerActive()) {
             // If the timer isn't up, then there are still passengers on board that we can look at
             if (query.split(":").length == 4) {
                 // Search by location
@@ -72,15 +72,15 @@ public class Manifest extends KlyActivity {
     // Show information about the results listView
     private void showUI(String query) {
         // Show and update the query display
-        TextView resultsTextView = (TextView) findViewById(R.id.queryDisplay);
+        TextView resultsTextView = findViewById(R.id.queryDisplay);
         String resultsString = getString(R.string.query_display_label) + " \"" + query + "\"";
         resultsTextView.setText(resultsString);
         resultsTextView.setVisibility(View.VISIBLE);
 
         // Show the column labels
-        TextView usernameColumn = (TextView) findViewById(R.id.usernameColumnLabel);
+        TextView usernameColumn = findViewById(R.id.usernameColumnLabel);
         usernameColumn.setVisibility(View.VISIBLE);
-        TextView locationColumn = (TextView) findViewById(R.id.locationColumnLabel);
+        TextView locationColumn = findViewById(R.id.locationColumnLabel);
         locationColumn.setVisibility(View.VISIBLE);
     }
 

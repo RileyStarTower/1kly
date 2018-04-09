@@ -25,7 +25,7 @@ public class DestinationActivity extends KlyActivity {
 
         startCountdown();
 
-        if (!EtaCountdown.getInstance().timerUp()) {
+        if (DateUtils.getInstance().timerActive()) {
             // If the timer isn't up, display the pre-arrival resident breakdown
             ResidentAdapter breakdownAdapter = new ResidentAdapter(this, ManifestQueries.getInstance().getResidents(this));
             final NonScrollListView listView = findViewById(R.id.residentList);

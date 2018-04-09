@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:id="@+id/aboutScroll"
     android:layout_marginTop="?android:attr/actionBarSize"
-    android:background="@drawable/kly_ship_cropped_static"
+    android:background="@color/activityBackground"
     >
+<!--android:background="@drawable/kly_ship_cropped_static"-->
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,24 +16,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="com.startowerstudio.kly.ShipStatus"
         tools:showIn="@layout/activity_ship_status">
-
-        <!--TODO: this scrolls too, now. It should not.-->
-        <!--<ImageView-->
-            <!--android:layout_width="163dp"-->
-            <!--android:layout_height="487dp"-->
-            <!--android:adjustViewBounds="true"-->
-            <!--android:cropToPadding="false"-->
-            <!--android:padding="0dp"-->
-            <!--android:scaleType="fitXY"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintHorizontal_bias="0.0"-->
-            <!--app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--app:layout_constraintRight_toRightOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--app:layout_constraintVertical_bias="1.0"-->
-            <!--app:srcCompat="@drawable/kly_ship_cropped_blue"-->
-            <!--android:contentDescription="@string/ship_description"-->
-            <!--/>-->
 
         <include layout="@layout/countdown"
             android:id="@+id/countdown"
@@ -44,7 +27,7 @@
             android:id="@+id/elapsedTime"
             android:layout_height="@dimen/countdown_height"
             android:layout_width="match_parent"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/standard_padding"
             app:layout_constraintTop_toBottomOf="@id/countdown"
             />
 
@@ -55,25 +38,24 @@
             android:layout_height="wrap_content"
             android:id="@+id/remainingDistContainer"
             android:orientation="vertical"
-            android:elevation="2dp"
+            android:elevation="@dimen/standard_elevation"
             android:onClick="loginDialog"
             app:layout_constraintTop_toBottomOf="@+id/elapsedTime"
             app:layout_constraintLeft_toLeftOf="@+id/elapsedTime"
             app:layout_constraintRight_toLeftOf="@+id/elapsedDistContainer"
             android:background="@color/backgroundDefault"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginTop="@dimen/standard_padding"
+            android:layout_marginEnd="@dimen/half_padding"
             >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/remainingDistLabel"
-                android:padding="8dp"
+                android:padding="@dimen/standard_padding"
                 android:text="@string/remaining"
                 android:textColor="@color/buttonText"
-                android:textSize="16sp"
+                android:textSize="@dimen/standard_label"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
 
@@ -82,8 +64,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/remainingDistVal"
                 android:textColor="@color/dataBlue"
-                android:textSize="24sp"
-                android:paddingLeft="8dp"
+                android:textSize="@dimen/standard_data"
+                android:paddingStart="@dimen/standard_padding"
+                android:paddingEnd="0dp"
                 android:paddingBottom="@dimen/standard_padding"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
@@ -95,25 +78,24 @@
             android:layout_height="wrap_content"
             android:id="@+id/elapsedDistContainer"
             android:orientation="vertical"
-            android:elevation="2dp"
+            android:elevation="@dimen/standard_elevation"
             android:onClick="loginDialog"
             app:layout_constraintTop_toBottomOf="@+id/elapsedTime"
             app:layout_constraintRight_toRightOf="@+id/elapsedTime"
             app:layout_constraintLeft_toRightOf="@id/remainingDistContainer"
             android:background="@color/backgroundDefault"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginTop="@dimen/standard_padding"
+            android:layout_marginStart="@dimen/half_padding"
             >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/elapsedDistLabel"
-                android:padding="8dp"
+                android:padding="@dimen/standard_padding"
                 android:text="@string/elapsed_distance"
                 android:textColor="@color/buttonText"
-                android:textSize="16sp"
+                android:textSize="@dimen/standard_label"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
 
@@ -122,8 +104,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/elapsedDistVal"
                 android:textColor="@color/dataBlue"
-                android:textSize="24sp"
-                android:paddingLeft="8dp"
+                android:textSize="@dimen/standard_data"
+                android:paddingStart="@dimen/standard_padding"
+                android:paddingEnd="0dp"
                 android:paddingBottom="@dimen/standard_padding"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
@@ -135,25 +118,24 @@
             android:layout_height="wrap_content"
             android:id="@+id/currentSpeedContainer"
             android:orientation="vertical"
-            android:elevation="2dp"
+            android:elevation="@dimen/standard_elevation"
             android:onClick="loginDialog"
             app:layout_constraintTop_toBottomOf="@+id/remainingDistContainer"
             app:layout_constraintLeft_toLeftOf="@+id/elapsedTime"
             app:layout_constraintRight_toLeftOf="@+id/averageSpeedContainer"
             android:background="@color/backgroundDefault"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginTop="@dimen/standard_padding"
+            android:layout_marginEnd="@dimen/half_padding"
             >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/currentSpeedLabel"
-                android:padding="8dp"
+                android:padding="@dimen/standard_padding"
                 android:text="@string/current_speed"
                 android:textColor="@color/buttonText"
-                android:textSize="16sp"
+                android:textSize="@dimen/standard_label"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
 
@@ -163,8 +145,9 @@
                 android:id="@+id/currentSpeedVal"
                 android:text="@string/speed_val"
                 android:textColor="@color/dataBlue"
-                android:textSize="24sp"
-                android:paddingLeft="8dp"
+                android:textSize="@dimen/standard_data"
+                android:paddingStart="@dimen/standard_padding"
+                android:paddingEnd="0dp"
                 android:paddingBottom="@dimen/standard_padding"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
@@ -176,25 +159,24 @@
             android:layout_height="wrap_content"
             android:id="@+id/averageSpeedContainer"
             android:orientation="vertical"
-            android:elevation="2dp"
+            android:elevation="@dimen/standard_elevation"
             android:onClick="loginDialog"
             app:layout_constraintTop_toBottomOf="@+id/elapsedDistContainer"
             app:layout_constraintRight_toRightOf="@+id/elapsedTime"
             app:layout_constraintLeft_toRightOf="@id/currentSpeedContainer"
             android:background="@color/backgroundDefault"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginTop="@dimen/standard_padding"
+            android:layout_marginStart="@dimen/half_padding"
             >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/averageSpeedLabel"
-                android:padding="8dp"
+                android:padding="@dimen/standard_padding"
                 android:text="@string/average_speed"
                 android:textColor="@color/buttonText"
-                android:textSize="16sp"
+                android:textSize="@dimen/standard_label"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
 
@@ -204,8 +186,9 @@
                 android:id="@+id/averageSpeedVal"
                 android:text="@string/speed_val"
                 android:textColor="@color/dataBlue"
-                android:textSize="24sp"
-                android:paddingLeft="8dp"
+                android:textSize="@dimen/standard_data"
+                android:paddingStart="@dimen/standard_padding"
+                android:paddingEnd="0dp"
                 android:paddingBottom="@dimen/standard_padding"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
@@ -217,25 +200,24 @@
             android:layout_height="wrap_content"
             android:id="@+id/healthContainer"
             android:orientation="vertical"
-            android:elevation="2dp"
+            android:elevation="@dimen/standard_elevation"
             android:onClick="loginDialog"
             app:layout_constraintTop_toBottomOf="@+id/currentSpeedContainer"
             app:layout_constraintLeft_toLeftOf="@+id/elapsedTime"
             app:layout_constraintRight_toLeftOf="@id/riskContainer"
             android:background="@color/backgroundDefault"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginTop="@dimen/standard_padding"
+            android:layout_marginEnd="@dimen/half_padding"
             >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/healthLabel"
-                android:padding="8dp"
+                android:padding="@dimen/standard_padding"
                 android:text="@string/passenger_health"
                 android:textColor="@color/buttonText"
-                android:textSize="16sp"
+                android:textSize="@dimen/standard_label"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
 
@@ -245,8 +227,9 @@
                 android:id="@+id/healthVal"
                 android:text="@string/health_good"
                 android:textColor="@color/greenLight"
-                android:textSize="24sp"
-                android:paddingLeft="8dp"
+                android:textSize="@dimen/standard_data"
+                android:paddingStart="@dimen/standard_padding"
+                android:paddingEnd="0dp"
                 android:paddingBottom="@dimen/standard_padding"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
@@ -258,25 +241,24 @@
             android:layout_height="wrap_content"
             android:id="@+id/riskContainer"
             android:orientation="vertical"
-            android:elevation="2dp"
+            android:elevation="@dimen/standard_elevation"
             android:onClick="loginDialog"
             app:layout_constraintTop_toBottomOf="@+id/averageSpeedContainer"
             app:layout_constraintRight_toRightOf="@+id/elapsedTime"
             app:layout_constraintLeft_toRightOf="@id/healthContainer"
             android:background="@color/backgroundDefault"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginTop="@dimen/standard_padding"
+            android:layout_marginStart="@dimen/half_padding"
             >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/riskLabel"
-                android:padding="8dp"
+                android:padding="@dimen/standard_padding"
                 android:text="@string/passenger_risk"
                 android:textColor="@color/buttonText"
-                android:textSize="16sp"
+                android:textSize="@dimen/standard_label"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
 
@@ -286,10 +268,8 @@
                 android:id="@+id/riskVal"
                 android:text="@string/risk_count"
                 android:textColor="@color/greenLight"
-                android:textSize="24sp"
-                android:paddingLeft="8dp"
-                android:paddingStart="8dp"
-                android:paddingRight="0dp"
+                android:textSize="@dimen/standard_data"
+                android:paddingStart="@dimen/standard_padding"
                 android:paddingEnd="0dp"
                 android:paddingBottom="@dimen/standard_padding"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -303,12 +283,10 @@
             android:layout_marginTop="8dp"
             android:id="@+id/breakdownLabel"
             android:text="@string/breakdown_label"
-            android:textSize="18sp"
+            android:textSize="@dimen/standard_label"
             android:textColor="@android:color/darker_gray"
             android:background="@color/backgroundDefault"
-            android:paddingLeft="8dp"
-            android:paddingStart="8dp"
-            android:paddingRight="0dp"
+            android:paddingStart="@dimen/standard_padding"
             android:paddingEnd="0dp"
             android:elevation="@dimen/standard_elevation"
             app:layout_constraintTop_toBottomOf="@id/riskContainer"
@@ -320,7 +298,7 @@
             android:layout_height="1000dp"
             android:id="@+id/breakdownList"
             android:layout_marginBottom="0dp"
-            android:elevation="2dp"
+            android:elevation="@dimen/standard_elevation"
             android:background="@color/backgroundDefault"
             android:divider="@null"
             android:dividerHeight="0dp"
@@ -338,26 +316,25 @@
             android:layout_height="wrap_content"
             android:id="@+id/filamentContainer"
             android:orientation="vertical"
-            android:elevation="2dp"
+            android:elevation="@dimen/standard_elevation"
             android:onClick="loginDialog"
             app:layout_constraintTop_toBottomOf="@+id/breakdownList"
             app:layout_constraintLeft_toLeftOf="@+id/elapsedTime"
             app:layout_constraintRight_toLeftOf="@+id/printerContainer"
             android:background="@color/backgroundDefault"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginEnd="4dp"
-            android:paddingBottom="8dp"
+            android:layout_marginTop="@dimen/standard_padding"
+            android:layout_marginEnd="@dimen/half_padding"
+            android:paddingBottom="@dimen/standard_padding"
             >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/filamentLabel"
-                android:padding="8dp"
+                android:padding="@dimen/standard_padding"
                 android:text="@string/filament_label"
                 android:textColor="@color/buttonText"
-                android:textSize="16sp"
+                android:textSize="@dimen/standard_label"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
 
@@ -367,8 +344,9 @@
                 android:id="@+id/filamentVal"
                 android:text="@string/filament_val"
                 android:textColor="@color/dataBlue"
-                android:textSize="24sp"
-                android:paddingLeft="8dp"
+                android:textSize="@dimen/standard_data"
+                android:paddingStart="@dimen/standard_padding"
+                android:paddingEnd="0dp"
                 android:paddingBottom="@dimen/standard_padding"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
@@ -380,16 +358,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/printerContainer"
             android:orientation="vertical"
-            android:elevation="2dp"
+            android:elevation="@dimen/standard_elevation"
             android:onClick="loginDialog"
             app:layout_constraintTop_toBottomOf="@+id/breakdownList"
             app:layout_constraintRight_toRightOf="@+id/elapsedTime"
             app:layout_constraintLeft_toRightOf="@id/filamentContainer"
             android:background="@color/backgroundDefault"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginStart="4dp"
-            android:paddingBottom="8dp"
+            android:layout_marginTop="@dimen/standard_padding"
+            android:layout_marginStart="@dimen/half_padding"
+            android:paddingBottom="@dimen/standard_padding"
             >
 
             <TextView
@@ -398,8 +375,8 @@
                 android:id="@+id/printerLabel"
                 android:text="@string/printer_label"
                 android:textColor="@color/buttonText"
-                android:textSize="16sp"
-                android:padding="8dp"
+                android:textSize="@dimen/standard_label"
+                android:padding="@dimen/standard_padding"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
 
@@ -409,15 +386,19 @@
                 android:id="@+id/printerVal"
                 android:text="@string/printer_val"
                 android:textColor="@color/greenLight"
-                android:textSize="24sp"
-                android:paddingLeft="8dp"
-                android:paddingStart="8dp"
-                android:paddingRight="0dp"
+                android:textSize="@dimen/standard_data"
+                android:paddingStart="@dimen/standard_padding"
                 android:paddingEnd="0dp"
                 android:paddingBottom="@dimen/standard_padding"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
         </LinearLayout>
+
+        <!--Some garbage because ScrollView doesn't work correctly-->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/standard_padding"
+            app:layout_constraintTop_toBottomOf="@id/printerContainer" />
 
     </android.support.constraint.ConstraintLayout>
 
