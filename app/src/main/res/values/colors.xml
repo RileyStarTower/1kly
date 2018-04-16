@@ -2,11 +2,11 @@
 <resources>
     <color name="colorPrimary">#374073</color>
     <color name="colorPrimaryDark">#252b4d</color>
-    <color name="colorAccent">#95a9bd</color>
+    <color name="colorAccent">#505ca6</color>
     <color name="buttonText">@android:color/darker_gray</color><!--#707070-->
     <color name="nullText">@android:color/darker_gray</color>
-    <color name="backgroundLicense">#e8e8e8</color>
     <color name="backgroundDefault">#2b3259</color>
+    <color name="backgroundLicense">@color/backgroundDefault</color><!--#e8e8e8-->
     <color name="dataBlue">#1d88f2</color>
     <color name="taskBackground">#f8faff</color>
     <color name="expiredTask">#f44336</color>

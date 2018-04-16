@@ -16,7 +16,7 @@
         android:paddingEnd="@dimen/standard_padding"
         android:paddingTop="@dimen/standard_padding"
         android:text="@string/eta_text"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@color/buttonText"
         android:textSize="@dimen/countdown_number_size"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="parent"

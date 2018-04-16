@@ -4,5 +4,6 @@
         android:key="pref_notifications"
         android:title="@string/notifications_preference"
         android:defaultValue="true"
+        android:background="@color/backgroundDefault"
         />
 </PreferenceScreen>
