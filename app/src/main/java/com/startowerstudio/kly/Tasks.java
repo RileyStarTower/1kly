@@ -126,12 +126,11 @@ public class Tasks extends KlyActivity {
             }
 
             final KlyTask task = taskList.get(position);
+            // Set the task description
+            TextView taskDesc = convertView.findViewById(R.id.taskDesc);
+            taskDesc.setText(task.getDescription());
             if (!task.hasExpired()) {
-                // If the task hasn't expired, show the expiration date, and the resolution text
-
-                // Set the task description
-                TextView taskDesc = convertView.findViewById(R.id.taskDesc);
-                taskDesc.setText(task.getDescription());
+                // If the task hasn't expired, hide the expiration text view, and don't use angry formatting
 
                 // Set the expiration date text
                 int expirationLength = DateUtils.getInstance().getExpirationLength(task.getExpiration());
@@ -146,12 +145,16 @@ public class Tasks extends KlyActivity {
                 // Set the resolution text
                 final TextView resolveTask = convertView.findViewById(R.id.resolveTask);
                 resolveTask.setText("Tap to " + task.getResolutionText());
+
+                // Remove the expiration text view
+                convertView.findViewById(R.id.taskExpiration).setVisibility(View.GONE);
             } else {
                 // If the task has expired, show the expiration text, and change the formatting
 
                 // Set the task description to the expired text
-                TextView taskDesc = convertView.findViewById(R.id.taskDesc);
-                taskDesc.setText(task.getExpiredText());
+                TextView taskExpiration = convertView.findViewById(R.id.taskExpiration);
+                taskExpiration.setText(task.getExpiredText());
+                taskExpiration.setVisibility(View.VISIBLE);
 
                 // Set the expiration date to say "past due"
                 TextView expiration = convertView.findViewById(R.id.expirationDate);

@@ -45,6 +45,17 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/taskExpiration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/expiredTask"
+            android:textStyle="italic"
+            android:textSize="@dimen/standard_label"
+            android:paddingStart="@dimen/standard_padding"
+            android:paddingEnd="@dimen/standard_padding"
+            />
+
+        <TextView
             android:id="@+id/resolveTask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
