@@ -1,14 +1,12 @@
 package com.startowerstudio.kly;
 
+import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 
 import java.util.ArrayList;
 
@@ -18,6 +16,9 @@ import java.util.ArrayList;
 
 public class KlyTaskUtils {
     private static final int NOTIFICATION_ID = 1;
+    // TODO: should I use ACTION_VIEW? I don't know what else I would use here
+    // ... maybe I don't even need this?
+//    private static final String ACTION_NOTIFICATION = "com.startowerstudio.kly.NOTIFICATION";
     private static final KlyTaskUtils ourInstance = new KlyTaskUtils();
 
     public static KlyTaskUtils getInstance() {
@@ -58,71 +59,54 @@ public class KlyTaskUtils {
         return false;
     }
 
+    public boolean isAlarmSet(Context context, int taskId) {
+        Intent intent = new Intent(context, NotificationService.class);
+        PendingIntent service = PendingIntent.getService(context, taskId, intent, PendingIntent.FLAG_NO_CREATE);
+        return service != null;
+    }
+
     // Schedules the notification for the task
-    void scheduleNotification(final Context context, final KlyTask task, final Handler handler) {
+    // TODO: this doesn't work, I need to use alarmManager, I think...
+    // ... and the difficult thing about doing that is I need to create an Intent that isn't an activity?
+    void scheduleNotification(final Context context, final KlyTask task) {
         if (isNotificationsOn(context)) {
             // If notifications are on, then we can schedule one
-            long delay = task.getStart().getTimeInMillis() - System.currentTimeMillis();
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    displayNotification(context);
-                }
-            };
-            handler.postDelayed(runnable, delay);
+            Intent intent = new Intent(context, NotificationService.class);
+            PendingIntent pendingIntent = PendingIntent.getService(context, task.getId(), intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC, task.getStart().getTimeInMillis(), pendingIntent);
         }
     }
 
     // Returns whether notifications for new tasks are turned on
-    private Boolean isNotificationsOn(Context context) {
+    protected Boolean isNotificationsOn(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPreferences.getBoolean(SettingsActivity.PREF_NOTIFICATIONS, true);
     }
 
     // Cancels any existing notifications
+    // TODO: move to NotificationService?
     void cancelNotifications(Context context) {
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.cancel(NOTIFICATION_ID);
+        try {
+            mNotificationManager.cancel(NOTIFICATION_ID);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 
-    // Creates a notification for the task
-    // Mostly copied from:
-    // https://developer.android.com/guide/topics/ui/notifiers/notifications.html#SimpleNotification
-    private void displayNotification(Context context) {
-        // Check if notifications are on, since they may have been turned off after this notification was scheduled
-        if (!isNotificationsOn(context)) {
-            return;
+    // Cancels any existing alarms for a task
+    void cancelAlarm(Context context, KlyTask task) {
+        Intent intent = new Intent(context, NotificationService.class);
+        PendingIntent pendingIntent = PendingIntent.getService(context, task.getId(), intent, PendingIntent.FLAG_NO_CREATE);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        try {
+            alarmManager.cancel(pendingIntent);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
-
-        // String CHANNEL_ID = "kly_channel"; // commented because I'm not sure if I need it now
-        // TODO: clean this up; I added some scheduling stuff at some point, and it got bloated
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.drawable.ic_kly_ship_icon_status_bar)
-                        .setContentTitle("1 kly")
-                        .setContentText("New tasks waiting in 1 kly");
-
-        // Creates an explicit intent for an Activity in your app
-        Intent resultIntent = new Intent(context, Tasks.class);
-
-        // The stack builder object will contain an artificial back stack for the started Activity.
-        // This ensures that navigating backward from the Activity leads out of your app to the Home screen.
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        // Adds the back stack for the Intent (but not the Intent itself)
-        stackBuilder.addParentStack(Tasks.class);
-        // Adds the Intent that starts the Activity to the top of the stack
-        stackBuilder.addNextIntent(resultIntent);
-
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-        mBuilder.setContentIntent(resultPendingIntent);
-
-        NotificationManager mNotificationManager =
-                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        // mNotificationId is a unique integer your app uses to identify the notification.
-        // For example, to cancel the notification, you can pass its ID number to NotificationManager.cancel().
-        // we use the same notification for everything, because we only want one notification at a time
-        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
 }

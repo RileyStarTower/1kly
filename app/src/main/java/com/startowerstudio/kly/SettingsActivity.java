@@ -1,9 +1,11 @@
 package com.startowerstudio.kly;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
-public class SettingsActivity extends KlyActivity {
-//        implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsActivity extends KlyActivity
+        implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     public static final String PREF_NOTIFICATIONS = "pref_notifications";
 
@@ -18,12 +20,27 @@ public class SettingsActivity extends KlyActivity {
     }
 
     // If notifications are turned off, we should clear out any existing notifications
-    // TODO: there's some extra lifecycle stuff I'm supposed to manage here, I guess?
-//    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-//        if (key.equals(PREF_NOTIFICATIONS)) {
-//            if (!KlyTaskUtils.getInstance().isNotificationsOn(this)) {
-//                KlyTaskUtils.getInstance().cancelNotifications(this);
-//            }
-//        }
-//    }
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(PREF_NOTIFICATIONS)) {
+            if (!KlyTaskUtils.getInstance().isNotificationsOn(this)) {
+                KlyTaskUtils.getInstance().cancelNotifications(this);
+            }
+        }
+    }
+
+    // TODO: I used getDefaultSharedPreferences, which I think is fine, but is different from the instructions:
+    // https://developer.android.com/guide/topics/ui/settings.html#Listening
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .unregisterOnSharedPreferenceChangeListener(this);
+    }
 }

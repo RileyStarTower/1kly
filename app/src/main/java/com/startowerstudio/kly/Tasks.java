@@ -54,6 +54,8 @@ public class Tasks extends KlyActivity {
 
         // Remove the notification when we clear the task
         KlyTaskUtils.getInstance().cancelNotifications(this);
+        // it's possible the task gets resolved before the alarm goes off for it, so we need to cancel any alarms that might exist for it
+        KlyTaskUtils.getInstance().cancelAlarm(this, task);
 
         // remove the task from the list
         taskList.remove(position);

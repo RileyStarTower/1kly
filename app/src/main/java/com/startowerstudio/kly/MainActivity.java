@@ -3,7 +3,6 @@ package com.startowerstudio.kly;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,7 +45,7 @@ public class MainActivity extends KlyActivity {
                         taskList.add(task);
 
                         // now schedule the task
-                        KlyTaskUtils.getInstance().scheduleNotification(this, task, new Handler());
+                        KlyTaskUtils.getInstance().scheduleNotification(this, task);
                     }
                 }
             }

@@ -104,6 +104,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.startowerstudio.kly.MainActivity" />
         </activity>
+
+        <!--Notifications service-->
+        <service android:name=".NotificationService" />
     </application>
 
 </manifest>
