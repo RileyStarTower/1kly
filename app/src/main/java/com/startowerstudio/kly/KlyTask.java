@@ -75,6 +75,7 @@ public class KlyTask {
         this.resolutionText = resolutionText;
         this.start = DateUtils.getInstance().mkStartDate();
         this.expiration = DateUtils.getInstance().mkEndDate(this.start);
+        id = -2; // error ID for these test tasks
     }
 
     // Constructor that reads from file
@@ -95,6 +96,7 @@ public class KlyTask {
             start = DateUtils.getInstance().mkCalendar(startString);
             String expirationString = fileIn.readLine();
             expiration = DateUtils.getInstance().mkCalendar(expirationString);
+            id = Integer.valueOf(fileIn.readLine());
             // TODO: do I need all three of these?
             fileIn.close();
             ds.close();
@@ -140,6 +142,7 @@ public class KlyTask {
             outputStream.write((resolutionText + "\n").getBytes());
             outputStream.write(DateUtils.getInstance().unMkCalendar(start).getBytes());
             outputStream.write(DateUtils.getInstance().unMkCalendar(expiration).getBytes());
+            outputStream.write((id + "\n").getBytes());
             outputStream.close();
         } catch (IOException e) {
             // TODO: actually catch this

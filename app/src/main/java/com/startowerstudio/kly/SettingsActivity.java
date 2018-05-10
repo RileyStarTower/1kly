@@ -24,11 +24,12 @@ public class SettingsActivity extends KlyActivity
         if (key.equals(PREF_NOTIFICATIONS)) {
             if (!KlyTaskUtils.getInstance().isNotificationsOn(this)) {
                 KlyTaskUtils.getInstance().cancelNotifications(this);
+            } else {
+                KlyTaskUtils.getInstance().restartNotifications(this, loadTasks());
             }
         }
     }
 
-    // TODO: I used getDefaultSharedPreferences, which I think is fine, but is different from the instructions:
     // https://developer.android.com/guide/topics/ui/settings.html#Listening
     @Override
     protected void onResume() {

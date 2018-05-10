@@ -13,6 +13,7 @@ import com.startowerstudio.kly.db.TaskQueries;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends KlyActivity {
     private ArrayList<KlyTask> taskList;
@@ -54,6 +55,16 @@ public class MainActivity extends KlyActivity {
         } else {
             deleteTaskFiles();
         }
+    }
+
+    // TODO: test only
+    private String getFirstTaskWrapper() {
+        return KlyTaskUtils.getInstance().getFirstTask(taskList);
+    }
+
+    // TODO: TEST ONLY
+    private String getCurrentTime() {
+        return DateUtils.getInstance().unMkCalendar(Calendar.getInstance());
     }
 
     // Deletes all files representing current tasks

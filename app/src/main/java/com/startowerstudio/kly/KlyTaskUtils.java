@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by Riley on 3/5/2018.
@@ -46,6 +47,18 @@ public class KlyTaskUtils {
         return count;
     }
 
+    // TODO: TEST ONLY
+    String getFirstTask(ArrayList<KlyTask> taskList) {
+        Calendar earliest = Calendar.getInstance();
+        earliest.set(Calendar.YEAR, 5000); // put the starter way out there
+        for (KlyTask task: taskList) {
+            if (task.getStart().before(earliest)) {
+                earliest = task.getStart();
+            }
+        }
+        return DateUtils.getInstance().unMkCalendar(earliest);
+    }
+
     // Returns true if the list contains at least one task with a start date in the past, false otherwise
     boolean hasCurrentTasks(ArrayList<KlyTask> taskList) {
         // check each task in the list to see if it has expired
@@ -59,6 +72,7 @@ public class KlyTaskUtils {
         return false;
     }
 
+    // TODO: NOT USED
     public boolean isAlarmSet(Context context, int taskId) {
         Intent intent = new Intent(context, NotificationService.class);
         PendingIntent service = PendingIntent.getService(context, taskId, intent, PendingIntent.FLAG_NO_CREATE);
@@ -66,7 +80,6 @@ public class KlyTaskUtils {
     }
 
     // Schedules the notification for the task
-    // TODO: this doesn't work, I need to use alarmManager, I think...
     // ... and the difficult thing about doing that is I need to create an Intent that isn't an activity?
     void scheduleNotification(final Context context, final KlyTask task) {
         if (isNotificationsOn(context)) {
@@ -94,6 +107,13 @@ public class KlyTaskUtils {
             mNotificationManager.cancel(NOTIFICATION_ID);
         } catch (NullPointerException e) {
             e.printStackTrace();
+        }
+    }
+
+    // Create notifications for all tasks, called when the notification setting is switched back on
+    void restartNotifications(Context context, ArrayList<KlyTask> taskList) {
+        for (KlyTask task: taskList) {
+            scheduleNotification(context, task);
         }
     }
 
