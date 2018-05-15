@@ -43,8 +43,8 @@ public class NotificationService extends Service {
 
         Notification notification = new Notification.Builder(this)
                 .setSmallIcon(R.drawable.ic_kly_ship_icon_status_bar)
-                .setContentTitle("1 kly")
-                .setContentText("New tasks waiting in 1 kly")
+                .setContentTitle("New tasks")
+//                .setContentText("New tasks waiting")
                 .setContentIntent(pendingIntent)
                 .build();
 

@@ -24,7 +24,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 class TaskDatabaseHelper extends SQLiteAssetHelper {
     private static final String DATABASE_NAME = "task.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     TaskDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
