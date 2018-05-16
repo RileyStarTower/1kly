@@ -20,7 +20,7 @@ import java.util.Calendar;
  * Created by Riley on 1/28/2018.
  */
 
-public class KlyActivity extends AppCompatActivity {
+public abstract class KlyActivity extends AppCompatActivity {
     protected TextView years, months, days, hours, minutes, seconds;
     protected Handler handler;
     protected Runnable runnable;
@@ -33,12 +33,12 @@ public class KlyActivity extends AppCompatActivity {
 
     // Get objects for all the TextViews in the countdown timer
     protected void initUI() {
-        years = (TextView) findViewById(R.id.yearNumber);
-        months = (TextView) findViewById(R.id.monthNumber);
-        days = (TextView) findViewById(R.id.dayNumber);
-        hours = (TextView) findViewById(R.id.hourNumber);
-        minutes = (TextView) findViewById(R.id.minuteNumber);
-        seconds = (TextView) findViewById(R.id.secondNumber);
+        years = findViewById(R.id.yearNumber);
+        months = findViewById(R.id.monthNumber);
+        days = findViewById(R.id.dayNumber);
+        hours = findViewById(R.id.hourNumber);
+        minutes = findViewById(R.id.minuteNumber);
+        seconds = findViewById(R.id.secondNumber);
     }
 
     // Start the countdown
@@ -82,7 +82,6 @@ public class KlyActivity extends AppCompatActivity {
         view.setText(val);
     }
 
-    // TODO: consider moving this to KlyTaskUtils
     // The filename must contain the correct prefix to be considered
     protected boolean invalidCurrentTask(String filename) {
         int length = KlyTask.CURRENT_TASKS_BASE.length();
@@ -95,7 +94,6 @@ public class KlyActivity extends AppCompatActivity {
         return !prefix.equals(KlyTask.CURRENT_TASKS_BASE);
     }
 
-    // TODO: consider moving this to KlyTaskUtils
     // Load and process the tasks file
     protected ArrayList<KlyTask> loadTasks() {
         ArrayList<KlyTask> taskList = new ArrayList<>();

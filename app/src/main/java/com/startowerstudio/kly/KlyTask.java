@@ -97,7 +97,7 @@ public class KlyTask {
             String expirationString = fileIn.readLine();
             expiration = DateUtils.getInstance().mkCalendar(expirationString);
             id = Integer.valueOf(fileIn.readLine());
-            // TODO: do I need all three of these?
+            // probably don't need all 3 of these, but I don't want to check, and it doesn't seem to be causing issues
             fileIn.close();
             ds.close();
             fs.close();
@@ -145,7 +145,6 @@ public class KlyTask {
             outputStream.write((id + "\n").getBytes());
             outputStream.close();
         } catch (IOException e) {
-            // TODO: actually catch this
             e.printStackTrace();
         }
     }

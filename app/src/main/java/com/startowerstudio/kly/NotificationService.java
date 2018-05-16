@@ -29,7 +29,7 @@ public class NotificationService extends Service {
         if (KlyTaskUtils.getInstance().isNotificationsOn(this)) {
             displayNotification();
         }
-        stopSelf();  // TODO: I'm pretty sure this is safe, I guess I'll find out
+        stopSelf();
         return START_STICKY;
     }
 

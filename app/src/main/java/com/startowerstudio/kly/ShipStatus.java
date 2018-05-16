@@ -75,30 +75,29 @@ public class ShipStatus extends KlyActivity {
             listView.setVisibility(View.GONE);
         }
 
-        // TODO: might be some performance issues with this...
         updateObservation();
     }
 
     // Initialize the view objects for the elapsed time layout
     private void initElapsed() {
-        yearsElapsed = (TextView) findViewById(R.id.yearElapsed);
-        monthsElapsed = (TextView) findViewById(R.id.monthElapsed);
-        daysElapsed = (TextView) findViewById(R.id.dayElapsed);
-        hoursElapsed = (TextView) findViewById(R.id.hourElapsed);
-        minutesElapsed = (TextView) findViewById(R.id.minuteElapsed);
-        secondsElapsed = (TextView) findViewById(R.id.secondElapsed);
+        yearsElapsed = findViewById(R.id.yearElapsed);
+        monthsElapsed = findViewById(R.id.monthElapsed);
+        daysElapsed = findViewById(R.id.dayElapsed);
+        hoursElapsed = findViewById(R.id.hourElapsed);
+        minutesElapsed = findViewById(R.id.minuteElapsed);
+        secondsElapsed = findViewById(R.id.secondElapsed);
     }
 
     // Fills out the remaining years, and elapsed distance views, based on the elapsed time values
     private void fillOutUI() {
         int remainingYears = (int) (Integer.parseInt(years.getText().toString().trim()) * 0.99);
         String yearStr = remainingYears + " ly";
-        TextView remainingDist = (TextView) findViewById(R.id.remainingDistVal);
+        TextView remainingDist = findViewById(R.id.remainingDistVal);
         remainingDist.setText(yearStr);
 
         int elapsedYears = (int) (Integer.parseInt(yearsElapsed.getText().toString().trim()) * 0.99);
         yearStr = elapsedYears + " ly";
-        TextView elapsedDist = (TextView) findViewById(R.id.elapsedDistVal);
+        TextView elapsedDist = findViewById(R.id.elapsedDistVal);
         elapsedDist.setText(yearStr);
     }
 
@@ -164,14 +163,12 @@ public class ShipStatus extends KlyActivity {
             endTime = DateUtils.getInstance().mkCalendar(fileIn.readLine());
             count = Integer.parseInt(fileIn.readLine());
 
-            // TODO: do I need all three of these?
             fileIn.close();
             ds.close();
             fs.close();
 
             if (Calendar.getInstance().after(endTime)) {
                 // update the count and time
-                // TODO: maybe make this biased toward removing passengers? so there aren't always passengers under observation?
                 count += rnd.nextBoolean() ? 1 : -1;    // randomly add or remove a passenger
                 count = count < 0 ? 0 : count;          // if count goes below 0, reset it to 0
                 endTime = Calendar.getInstance();
@@ -187,7 +184,6 @@ public class ShipStatus extends KlyActivity {
             updateEndTime(endTime, rnd);
 
             // write the new data back to the file
-            // TODO: don't have a nested try here, come on... ok, but it still is a nested try...
             writeObservation(endTime, count);
         }
 

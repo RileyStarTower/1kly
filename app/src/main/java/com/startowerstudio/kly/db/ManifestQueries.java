@@ -36,8 +36,7 @@ public class ManifestQueries extends KlyDB {
 
     // Returns passengers that match a given name string approximately
     public Cursor getByNames(SQLiteDatabase db, String names) {
-        Cursor cursor = runQuery(db, massageNames(names));
-        return cursor;
+        return runQuery(db, massageNames(names));
     }
 
     // Builds a query out of a set of name strings

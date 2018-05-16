@@ -114,7 +114,6 @@ public class Tasks extends KlyActivity {
             } else if (expirationLength == 1) {
                 return expirationLength + " day";
             } else {
-                // TODO: I don't think this ever gets hit
                 return "today";
             }
         }

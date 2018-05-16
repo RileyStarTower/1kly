@@ -94,13 +94,12 @@ public class DateUtils {
 
     // Converts a Calendar object back into a formatted String
     String unMkCalendar(Calendar calendar) {
-        String date = calendar.get(Calendar.YEAR) + ":" +
+        return calendar.get(Calendar.YEAR) + ":" +
                 formatTwo(calendar.get(Calendar.MONTH)) + ":" +
                 formatTwo(calendar.get(Calendar.DAY_OF_MONTH)) + ":" +
                 formatTwo(calendar.get(Calendar.HOUR_OF_DAY)) + ":" +
                 formatTwo(calendar.get(Calendar.MINUTE)) + ":" +
                 formatTwo(calendar.get(Calendar.SECOND)) + "\n";
-        return date;
     }
 
     // Formats a value to have 2 digits
