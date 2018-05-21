@@ -24,7 +24,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 public class ManifestDatabaseHelper extends SQLiteAssetHelper {
     private static final String DATABASE_NAME = "manifest.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
 
     public ManifestDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
