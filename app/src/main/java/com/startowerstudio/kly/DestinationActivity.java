@@ -37,6 +37,11 @@ public class DestinationActivity extends KlyActivity {
             final NonScrollListView listView = findViewById(R.id.residentList);
             listView.setAdapter(breakdownAdapter);
             setListViewHeight(listView);
+
+            // Set the resident health to Good
+            TextView textView = findViewById(R.id.residentHealthVal);
+            textView.setText(R.string.health_good);
+            textView.setTextColor(getResources().getColor(R.color.greenLight));
         }
     }
 

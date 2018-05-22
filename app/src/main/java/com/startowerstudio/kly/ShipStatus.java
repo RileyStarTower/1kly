@@ -56,6 +56,7 @@ public class ShipStatus extends KlyActivity {
             ScrollView scrollView = findViewById(R.id.aboutScroll);
             scrollView.setFocusableInTouchMode(true);
             scrollView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+            updateObservation();
         } else {
             // If the timer is up, don't show the breakdown, and reset a bunch of the text
             TextView textView = findViewById(R.id.currentSpeedVal);
@@ -74,8 +75,6 @@ public class ShipStatus extends KlyActivity {
             ListView listView = (NonScrollListView) findViewById(R.id.breakdownList);
             listView.setVisibility(View.GONE);
         }
-
-        updateObservation();
     }
 
     // Initialize the view objects for the elapsed time layout
