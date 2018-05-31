@@ -1,5 +1,5 @@
 # 1kly
-1 kly is a conceptual art piece about time. kly is an abbreviation of kilolight-year, a unit equal to 1,000 light-years. Coming to Android soon.
+1 kly is a conceptual art piece about time and activism. kly is an abbreviation of kilolight-year, a unit equal to 1,000 light-years. Out now on Android.
 
 If you are interested in translating this app, and need me to do things to make that happen, feel free to reach out.
 
